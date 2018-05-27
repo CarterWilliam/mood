@@ -1,0 +1,10 @@
+# Build
+/build
+
+# node
+/node_modules/
+
+# Assets
+/raw-assets/
+*.xcf # Gimp
+.tmx # Tiled
