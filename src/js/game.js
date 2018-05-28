@@ -1,3 +1,6 @@
+import 'phaser'
+import Soldier from './sprites/soldier'
+
 var config = {
   type: Phaser.AUTO,
   width: 800,
@@ -25,9 +28,9 @@ var player;
 
 function preload() {
   console.log("preload")
-  this.load.image('tiles', 'src/assets/images/magecity.png');
-  this.load.tilemapTiledJSON('map', 'src/assets/maps/corridor-town.json');
-  this.load.spritesheet('soldier', 'src/assets/images/soldier.png', { frameWidth: 60, frameHeight: 60 });
+  this.load.image('tiles', 'assets/images/magecity.png');
+  this.load.tilemapTiledJSON('map', 'assets/maps/corridor-town.json');
+  this.load.spritesheet('soldier', 'assets/images/soldier.png', { frameWidth: 60, frameHeight: 60 });
 }
 
 function create() {
@@ -40,10 +43,12 @@ function create() {
 
   obstructions.setCollisionByProperty({ collide: true });
 
-  player = this.physics.add.sprite(100, 450, 'soldier');
-  player.body.setSize(30, 30);
-  player.body.setOffset(15,30)
-  player.setCollideWorldBounds(true);
+  player = new Soldier({
+    scene: this,
+    key: 'soldier',
+    x: 100, y: 300
+  })
+
   this.anims.create({
     key: 'move-down',
     frames: this.anims.generateFrameNumbers('soldier', { start: 0, end: 3 }),
@@ -133,46 +138,46 @@ function move() {
   }
 
   if (movingX == 0 && movingY == -1) {
-    player.setVelocityX(0)
-    player.setVelocityY(-velocity)
+    player.body.setVelocityX(0)
+    player.body.setVelocityY(-velocity)
     player.anims.play('move-up', true)
   } else if (movingX == 1 && movingY == -1) {
-    player.setVelocityX(diagonalVelocity)
-    player.setVelocityY(-diagonalVelocity)
+    player.body.setVelocityX(diagonalVelocity)
+    player.body.setVelocityY(-diagonalVelocity)
     player.anims.play('move-up-right', true)
   } else if (movingX == 1 && movingY == 0) {
-    player.setVelocityX(velocity)
-    player.setVelocityY(0)
+    player.body.setVelocityX(velocity)
+    player.body.setVelocityY(0)
     player.anims.play('move-right', true)
   } else if (movingX == 1 && movingY == 1) {
-    player.setVelocityX(diagonalVelocity)
-    player.setVelocityY(diagonalVelocity)
+    player.body.setVelocityX(diagonalVelocity)
+    player.body.setVelocityY(diagonalVelocity)
     player.anims.play('move-down-right', true)
   } else if (movingX == 0 && movingY == 1) {
-    player.setVelocityX(0)
-    player.setVelocityY(velocity)
+    player.body.setVelocityX(0)
+    player.body.setVelocityY(velocity)
     player.anims.play('move-down', true)
   } else if (movingX == -1 && movingY == 1) {
-    player.setVelocityX(-diagonalVelocity)
-    player.setVelocityY(diagonalVelocity)
+    player.body.setVelocityX(-diagonalVelocity)
+    player.body.setVelocityY(diagonalVelocity)
     player.anims.play('move-down-left', true)
   } else if (movingX == -1 && movingY == 0) {
-    player.setVelocityX(-velocity)
-    player.setVelocityY(0)
+    player.body.setVelocityX(-velocity)
+    player.body.setVelocityY(0)
     player.anims.play('move-left', true)
   } else if (movingX == -1 && movingY == -1) {
-    player.setVelocityX(-diagonalVelocity)
-    player.setVelocityY(-diagonalVelocity)
+    player.body.setVelocityX(-diagonalVelocity)
+    player.body.setVelocityY(-diagonalVelocity)
     player.anims.play('move-up-left', true)
   } else {
     player.anims.stop()
-    player.setVelocityX(0)
-    player.setVelocityY(0)
+    player.body.setVelocityX(0)
+    player.body.setVelocityY(0)
   }
 }
 
 function fire() {
   player.anims.stop()
-  player.setVelocityX(0)
-  player.setVelocityY(0)
+  player.body.setVelocityX(0)
+  player.body.setVelocityY(0)
 }
