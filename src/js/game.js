@@ -1,4 +1,3 @@
-import 'phaser'
 import Soldier from './sprites/soldier'
 
 var config = {
@@ -27,14 +26,12 @@ var cursors;
 var player;
 
 function preload() {
-  console.log("preload")
   this.load.image('tiles', 'assets/images/magecity.png');
   this.load.tilemapTiledJSON('map', 'assets/maps/corridor-town.json');
   this.load.spritesheet('soldier', 'assets/images/soldier.png', { frameWidth: 60, frameHeight: 60 });
 }
 
 function create() {
-  console.log("create")
   map = this.make.tilemap({ key: 'map' });
   var tileset = map.addTilesetImage('magecity', 'tiles')
   var floor = map.createStaticLayer('floor', tileset, 0, 0);
@@ -106,78 +103,6 @@ function create() {
 
 }
 
-var velocity = 160;
-var diagonalVelocity = Math.floor(velocity / Math.SQRT2);
-
 function update() {
-  if (cursors.space.isDown) {
-    fire()
-  } else {
-    move()
-  }
-}
-
-function move() {
-  var movingX = 0;
-  var movingY = 0;
-
-  if (cursors.left.isDown) {
-    movingX -= 1;
-  }
-
-  if (cursors.right.isDown) {
-    movingX += 1;
-  }
-
-  if (cursors.up.isDown) {
-    movingY -= 1;
-  }
-
-  if (cursors.down.isDown) {
-    movingY += 1;
-  }
-
-  if (movingX == 0 && movingY == -1) {
-    player.body.setVelocityX(0)
-    player.body.setVelocityY(-velocity)
-    player.anims.play('move-up', true)
-  } else if (movingX == 1 && movingY == -1) {
-    player.body.setVelocityX(diagonalVelocity)
-    player.body.setVelocityY(-diagonalVelocity)
-    player.anims.play('move-up-right', true)
-  } else if (movingX == 1 && movingY == 0) {
-    player.body.setVelocityX(velocity)
-    player.body.setVelocityY(0)
-    player.anims.play('move-right', true)
-  } else if (movingX == 1 && movingY == 1) {
-    player.body.setVelocityX(diagonalVelocity)
-    player.body.setVelocityY(diagonalVelocity)
-    player.anims.play('move-down-right', true)
-  } else if (movingX == 0 && movingY == 1) {
-    player.body.setVelocityX(0)
-    player.body.setVelocityY(velocity)
-    player.anims.play('move-down', true)
-  } else if (movingX == -1 && movingY == 1) {
-    player.body.setVelocityX(-diagonalVelocity)
-    player.body.setVelocityY(diagonalVelocity)
-    player.anims.play('move-down-left', true)
-  } else if (movingX == -1 && movingY == 0) {
-    player.body.setVelocityX(-velocity)
-    player.body.setVelocityY(0)
-    player.anims.play('move-left', true)
-  } else if (movingX == -1 && movingY == -1) {
-    player.body.setVelocityX(-diagonalVelocity)
-    player.body.setVelocityY(-diagonalVelocity)
-    player.anims.play('move-up-left', true)
-  } else {
-    player.anims.stop()
-    player.body.setVelocityX(0)
-    player.body.setVelocityY(0)
-  }
-}
-
-function fire() {
-  player.anims.stop()
-  player.body.setVelocityX(0)
-  player.body.setVelocityY(0)
+  player.update(cursors)
 }
