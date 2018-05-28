@@ -125,28 +125,28 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
   animateMovement() {
     switch(this.direction) {
       case Direction.WEST:
-        this.anims.play('move-west', true);
+        this.anims.play('soldier-move-west', true);
         break;
       case Direction.NORTHWEST:
-        this.anims.play('move-north-west', true);
+        this.anims.play('soldier-move-north-west', true);
         break;
       case Direction.NORTH:
-        this.anims.play('move-north', true);
+        this.anims.play('soldier-move-north', true);
         break;
       case Direction.NORTHEAST:
-        this.anims.play('move-north-east', true);
+        this.anims.play('soldier-move-north-east', true);
         break;
       case Direction.EAST:
-        this.anims.play('move-east', true);
+        this.anims.play('soldier-move-east', true);
         break;
       case Direction.SOUTHEAST:
-        this.anims.play('move-south-east', true);
+        this.anims.play('soldier-move-south-east', true);
         break;
       case Direction.SOUTH:
-        this.anims.play('move-south', true);
+        this.anims.play('soldier-move-south', true);
         break;
       case Direction.SOUTHWEST:
-        this.anims.play('move-south-west', true);
+        this.anims.play('soldier-move-south-west', true);
         break;
     }
   }
@@ -159,28 +159,28 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
 
     switch(this.direction) {
       case Direction.WEST:
-        this.anims.play('shoot-west');
+        this.anims.play('soldier-shoot-west');
         break;
       case Direction.NORTHWEST:
-        this.anims.play('shoot-north-west');
+        this.anims.play('soldier-shoot-north-west');
         break;
       case Direction.NORTH:
-        this.anims.play('shoot-north');
+        this.anims.play('soldier-shoot-north');
         break;
       case Direction.NORTHEAST:
-        this.anims.play('shoot-north-east');
+        this.anims.play('soldier-shoot-north-east');
         break;
       case Direction.EAST:
-        this.anims.play('shoot-east');
+        this.anims.play('soldier-shoot-east');
         break;
       case Direction.SOUTHEAST:
-        this.anims.play('shoot-south-east');
+        this.anims.play('soldier-shoot-south-east');
         break;
       case Direction.SOUTH:
-        this.anims.play('shoot-south');
+        this.anims.play('soldier-shoot-south');
         break;
       case Direction.SOUTHWEST:
-        this.anims.play('shoot-south-west');
+        this.anims.play('soldier-shoot-south-west');
         break;
     }
     this.anims.stopOnRepeat()
