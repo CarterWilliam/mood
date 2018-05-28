@@ -7,4 +7,4 @@
 # Assets
 /raw-assets/
 *.xcf # Gimp
-.tmx # Tiled
+*.tmx # Tiled

@@ -105,6 +105,14 @@ var velocity = 160;
 var diagonalVelocity = Math.floor(velocity / Math.SQRT2);
 
 function update() {
+  if (cursors.space.isDown) {
+    fire()
+  } else {
+    move()
+  }
+}
+
+function move() {
   var movingX = 0;
   var movingY = 0;
 
@@ -161,4 +169,10 @@ function update() {
     player.setVelocityX(0)
     player.setVelocityY(0)
   }
+}
+
+function fire() {
+  player.anims.stop()
+  player.setVelocityX(0)
+  player.setVelocityY(0)
 }
