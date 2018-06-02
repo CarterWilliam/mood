@@ -1,6 +1,7 @@
 import Soldier from './sprites/soldier'
 import Imp from './sprites/imp'
-import createAnimations from './animations/create.js'
+import Projectiles from './sprites/projectiles/projectiles'
+import createAnimations from './animations/create'
 
 var config = {
   type: Phaser.AUTO,
@@ -28,7 +29,8 @@ var cursors;
 var player;
 
 function preload() {
-  this.load.image('tiles', 'assets/images/magecity.png');
+  this.load.image('tiles', 'assets/images/magecity.png')
+  this.load.image('bullet', 'assets/images/bullet.png')
   this.load.tilemapTiledJSON('map', 'assets/maps/corridor-town.json');
   this.load.spritesheet('soldier', 'assets/images/soldier.png', { frameWidth: 60, frameHeight: 60 });
   this.load.spritesheet('imp', 'assets/images/imp.png', { frameWidth: 60, frameHeight: 60 });
@@ -45,17 +47,30 @@ function create() {
 
   createAnimations(this)
 
+  let playerProjectiles = new Projectiles(this);
+
   player = new Soldier({
     scene: this,
     key: 'soldier',
-    x: 100, y: 300
+    x: 100, y: 300,
+    projectiles: playerProjectiles
   })
 
   var imp = new Imp({ scene: this, key: 'imp', x: 200, y: 200})
 
+
   this.physics.add.collider(player, obstructions);
   this.physics.add.collider(imp, obstructions);
   this.physics.add.collider(player, imp);
+
+  this.physics.add.collider(playerProjectiles, obstructions, function(sprite, tile) {
+    sprite.destroy()
+  });
+
+  this.physics.add.collider(playerProjectiles, imp, function(projectile, imp) {
+    imp.damage(projectile.damage)
+    projectile.destroy()
+  })
 
   var foreground = map.createStaticLayer('foreground', tileset, 0, 0);
 

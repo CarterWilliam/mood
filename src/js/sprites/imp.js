@@ -11,4 +11,8 @@ export default class Imp extends Phaser.GameObjects.Sprite {
 
     this.anims.play('imp-hang', true)
   }
+
+  damage(hits) {
+    console.log("OW!")
+  }
 }

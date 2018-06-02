@@ -2,14 +2,14 @@ const velocity = 160;
 const diagonalVelocity = Math.floor(velocity / Math.SQRT2);
 
 const Direction = Object.freeze({
-  WEST: 0,
-  NORTHWEST: 1,
-  NORTH: 2,
-  NORTHEAST: 3,
-  EAST: 4,
-  SOUTHEAST: 5,
-  SOUTH: 6,
-  SOUTHWEST: 7
+  WEST: Math.PI,
+  NORTHWEST: Math.PI * 5/4,
+  NORTH: Math.PI * 3/2,
+  NORTHEAST: Math.PI * 7/4,
+  EAST: 0,
+  SOUTHEAST: Math.PI / 4,
+  SOUTH: Math.PI / 2,
+  SOUTHWEST: Math.PI * 3/ 4
 })
 
 export default class Soldier extends Phaser.GameObjects.Sprite {
@@ -23,13 +23,16 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
     this.body.setOffset(15,30)
     this.body.setCollideWorldBounds(true)
 
+    this.projectiles = config.projectiles
+
     this.direction = Direction.SOUTH
     this.firing = false
+    this.fired = false
   }
 
   update(cursors) {
     if(this.firing) {
-      this.continueFiring()
+      this.whileFiring()
     } else{
       this.action(cursors)
     }
@@ -186,11 +189,21 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
     this.anims.stopOnRepeat()
   }
 
-  continueFiring() {
+  whileFiring() {
+    if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
+      this.projectiles.addBullet(this, { x: this.x, y: this.y }, this.direction)
+      this.fired = true
+    }
+
     if (!this.anims.isPlaying) {
       // Finish shooting
       this.firing = false
+      this.fired = false
     }
+  }
+
+  isShootFrame(index) {
+    return (index % 7 == 5)
   }
 
 }
