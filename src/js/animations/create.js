@@ -29,13 +29,14 @@ module.exports = function(goLoader) {
   // Imp
   createAnimation('imp', 'imp-hang', [0, 2], 2)
   createConsecutiveAnimation('imp', 'imp-move-south', 0, 3)
+  createConsecutiveAnimation('imp', 'imp-die', 39, 43, 0)
 
-  function createConsecutiveAnimation(spriteSheetId, id, fromIndex, toIndex) {
+  function createConsecutiveAnimation(spriteSheetId, id, fromIndex, toIndex, repeat) {
     goLoader.anims.create({
       key: id,
       frames: goLoader.anims.generateFrameNumbers(spriteSheetId, { start: fromIndex, end: toIndex }),
       frameRate: 10,
-      repeat: -1
+      repeat: repeat
     });
   }
 

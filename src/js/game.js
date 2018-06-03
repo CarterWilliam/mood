@@ -56,8 +56,11 @@ function create() {
     projectiles: playerProjectiles
   })
 
-  var imp = new Imp({ scene: this, key: 'imp', x: 200, y: 200})
-
+  var imp = new Imp({
+    scene: this,
+    key: 'imp',
+    x: 200, y: 200,
+    health: 10})
 
   this.physics.add.collider(player, obstructions);
   this.physics.add.collider(imp, obstructions);
@@ -68,7 +71,7 @@ function create() {
   });
 
   this.physics.add.collider(playerProjectiles, imp, function(projectile, imp) {
-    imp.damage(projectile.damage)
+    imp.takeDamage(projectile.damage)
     projectile.destroy()
   })
 
