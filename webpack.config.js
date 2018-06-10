@@ -16,6 +16,7 @@ module.exports = [
       new CopyWebpackPlugin([
         { from: 'src/index.html', to: 'index.html' },
         { from: 'src/assets', to: 'assets' },
+        { from: 'src/css', to: 'css' },
         { from: 'node_modules/phaser/dist/phaser.js', to: 'lib/phaser.js'}
       ])
     ],

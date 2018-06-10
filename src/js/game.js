@@ -4,13 +4,16 @@ import Enemy from './sprites/enemy'
 import Imp from './sprites/imp'
 import Projectiles from './sprites/projectiles/projectiles'
 import createAnimations from './animations/create'
+import BootScene from './states/boot'
+import LoadingScene from './states/loading'
+import MenuScene from './states/menu'
 
 var config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
   backgroundColor: '#2d2d2d',
-  parent: 'phaser-example',
+  parent: 'game-container',
   pixelArt: true,
   physics: {
     default: 'arcade',
@@ -18,16 +21,13 @@ var config = {
       gravity: { y: 0 }
     }
   },
-  scene: {
-    preload: preload,
-    create: create,
-    update: update
-  }
+  scene: [ BootScene, LoadingScene, MenuScene ]
 };
 
 const SCALE = 2
 
-var game = new Phaser.Game(config);
+var game = new Phaser.Game(config)
+
 var cursors
 var player, imp
 
