@@ -8,6 +8,12 @@ module.exports = [
   {
     entry: './src/js/game.js',
     mode: 'development',
+    resolve: {
+      modules: [
+        path.resolve(__dirname, 'src/js'),
+        path.resolve(__dirname, 'node_modules')
+      ]
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: "bundle.js"

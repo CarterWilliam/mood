@@ -14,6 +14,8 @@ export default class LoadingScene extends Phaser.Scene {
     this.loadMaps()
     this.loadAudio()
 
+    this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
+
     this.load.image('bullet', 'assets/images/bullet.png')
     this.load.spritesheet('fireball', 'assets/images/fireball.png', { frameWidth: 15, frameHeight: 15 })
 
