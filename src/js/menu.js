@@ -49,7 +49,6 @@ export class Menu {
         option.text,
         menuTextStyle)
       option.setSprite(sprite)
-      console.log("Setting depth: " + Depth.MENU_TEXT)
       sprite.setDepth(Depth.MENU_TEXT)
     })
     this.cursorIndex = 0

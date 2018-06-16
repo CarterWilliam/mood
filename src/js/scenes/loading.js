@@ -21,7 +21,7 @@ export default class LoadingScene extends Phaser.Scene {
     this.load.image('bullet', 'assets/images/bullet.png')
     this.load.spritesheet('fireball', 'assets/images/fireball.png', { frameWidth: 15, frameHeight: 15 })
 
-    this.load.spritesheet('soldier', 'assets/images/soldier.png', { frameWidth: 60, frameHeight: 60 });
+    this.load.spritesheet('soldier', 'assets/images/soldier.png', { frameWidth: 60, frameHeight: 60, endFrame: 60 });
     this.load.spritesheet('imp', 'assets/images/imp.png', { frameWidth: 60, frameHeight: 60, endFrame: 68 });
   }
 
@@ -52,6 +52,11 @@ export default class LoadingScene extends Phaser.Scene {
 
   loadAudio() {
     this.load.audio('pistol', 'assets/audio/guns/pistol.ogg')
+
+    this.load.audio('imp-die', 'assets/audio/enemy/imp/death.ogg')
+    this.load.audio('imp-hurt', 'assets/audio/enemy/imp/pain.ogg')
+    this.load.audio('soldier-die', 'assets/audio/player/death.ogg')
+    this.load.audio('soldier-hurt', 'assets/audio/player/pain.ogg')
   }
 
   loadFonts() {

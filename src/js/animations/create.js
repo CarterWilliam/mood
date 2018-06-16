@@ -26,6 +26,7 @@ module.exports = function(goLoader) {
   createConsecutiveAnimation('soldier', 'soldier-move-south-east', 49, 52)
   createAnimation('soldier', 'soldier-shoot-south-east', [ 53, 54, 53 ])
   createConsecutiveAnimation('soldier', 'soldier-hit-south-east', 55, 55)
+  createAnimation('soldier', 'soldier-die', [56, 57, 58, 59, 60], 10, 0)
 
   // Imp
   createAnimation('imp', 'imp-hang', [0, 2], 2)

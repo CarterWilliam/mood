@@ -85,6 +85,7 @@ export default class GameScene extends Phaser.Scene {
     })
 
     this.physics.add.collider(enemyProjectiles, player, function(projectile, tile) {
+      player.takeDamage(projectile.damage)
       projectile.destroy()
     })
 

@@ -122,11 +122,11 @@ export default class Enemy extends Killable(Sprite) {
     })
   }
 
-  damageCallback() {
+  onDamage() {
     this.state = State.AGGRESSIVE
   }
 
-  deathCallback() {
+  onDie() {
     this.state = State.DEAD
   }
 }

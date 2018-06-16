@@ -1,12 +1,23 @@
 import { Depth, Direction } from 'configuration/constants'
+import Killable from './killable'
+import Sprite from './sprite'
 
 const velocity = 160;
 const diagonalVelocity = Math.floor(velocity / Math.SQRT2);
 
-export default class Soldier extends Phaser.GameObjects.Sprite {
+const State = Object.freeze({
+  NORMAL: 0,
+  FIRING: 1,
+  DEAD: 2
+})
+
+export default class Soldier extends Killable(Sprite) {
 
   constructor(config) {
-    super(config.scene, config.x, config.y, config.key);
+    config.key = 'soldier'
+    config.health = 20
+    super(config)
+
     config.scene.physics.world.enable(this);
     config.scene.add.existing(this);
 
@@ -19,15 +30,19 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
     this.projectiles = config.projectiles
 
     this.direction = Direction.SOUTH
-    this.firing = false
-    this.fired = false
+    this.state = State.NORMAL
   }
 
   update(cursors) {
-    if(this.firing) {
-      this.whileFiring()
-    } else{
-      this.action(cursors)
+    switch (this.state) {
+      case State.NORMAL:
+        this.action(cursors)
+        break
+      case State.FIRING:
+        this.whileFiring()
+        break
+      case State.DEAD:
+        this.whileDead()
     }
   }
 
@@ -148,7 +163,8 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
   }
 
   startFiring(cursors) {
-    this.firing = true
+    this.state = State.FIRING
+    this.fired = false
 
     this.body.setVelocityX(0)
     this.body.setVelocityY(0)
@@ -185,12 +201,12 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
   whileFiring() {
     if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
       this.projectiles.addBullet(this, { x: this.x, y: this.y }, this.direction)
+      this.scene.sound.play('pistol')
       this.fired = true
     }
 
     if (!this.anims.isPlaying) {
-      // Finish shooting
-      this.firing = false
+      this.state = State.NORMAL
       this.fired = false
     }
   }
@@ -199,4 +215,11 @@ export default class Soldier extends Phaser.GameObjects.Sprite {
     return (index % 7 == 5)
   }
 
+  onDie() {
+    this.state = State.DEAD
+  }
+
+  whileDead() {
+    // What can you do?
+  }
 }
