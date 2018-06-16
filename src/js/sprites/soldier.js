@@ -1,4 +1,4 @@
-import { Depth, Direction } from '../constants'
+import { Depth, Direction } from 'configuration/constants'
 
 const velocity = 160;
 const diagonalVelocity = Math.floor(velocity / Math.SQRT2);

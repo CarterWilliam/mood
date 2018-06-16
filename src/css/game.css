@@ -2,10 +2,3 @@
   width: 800px;
   margin: auto;
 }
-
-@font-face {
-  font-family: 'Doom';
-  src:
-    url('../assets/fonts/doom.ttf')
-    format('truetype')
-  }

@@ -1,4 +1,4 @@
-import { Depth } from '../constants'
+import { Depth } from 'configuration/constants'
 
 export default Killable => class extends Killable {
 

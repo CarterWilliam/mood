@@ -1,4 +1,5 @@
-import { Menu, MenuItem } from '../menu'
+import { Depth } from 'configuration/constants'
+import { Menu, MenuItem } from 'menu'
 
 const MenuSpeed = 100
 
@@ -11,6 +12,7 @@ export default class MenuScene extends Phaser.Scene {
   preload() {
     let background = this.add.sprite(0, 0, 'splash');
     background.setOrigin(0,0)
+    background.setDepth(Depth.MENU_BACKGROUND)
   }
 
   create() {

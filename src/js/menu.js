@@ -1,3 +1,5 @@
+import { Depth } from 'configuration/constants'
+
 const menuTextStyle = {
   color: '#BB0000', align: 'left', font: '28pt Doom',
   stroke: '#000000',
@@ -47,6 +49,8 @@ export class Menu {
         option.text,
         menuTextStyle)
       option.setSprite(sprite)
+      console.log("Setting depth: " + Depth.MENU_TEXT)
+      sprite.setDepth(Depth.MENU_TEXT)
     })
     this.cursorIndex = 0
   }

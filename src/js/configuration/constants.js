@@ -1,4 +1,7 @@
 export const Depth = Object.freeze({
+  MENU_BACKGROUND: 0,
+  MENU_TEXT: 1,
+
   FLOOR: 0,
   OBSTACLES: 1,
   /* Pick your body up and drop it */ ONTHEFLOOR: 2,

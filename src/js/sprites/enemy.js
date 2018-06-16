@@ -5,7 +5,7 @@ import {
   directionKey,
   PiOver8,
   TwoPi
-} from '../constants'
+} from 'configuration/constants'
 
 const State = Object.freeze({
   PASSIVE: 0,

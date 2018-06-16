@@ -1,3 +1,4 @@
+import * as WebFont from 'webfontloader'
 
 export default class LoadingScene extends Phaser.Scene {
 
@@ -13,6 +14,7 @@ export default class LoadingScene extends Phaser.Scene {
 
     this.loadMaps()
     this.loadAudio()
+    this.loadFonts()
 
     this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
 
@@ -44,12 +46,21 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   loadMaps() {
-    this.load.image('tiles', 'assets/maps/emptytown.png')
-    this.load.tilemapTiledJSON('map', 'assets/maps/emptytown.json')
+    this.load.image('level1-tiles', 'assets/maps/level1.png')
+    this.load.tilemapTiledJSON('level1-map', 'assets/maps/level1.json')
   }
 
   loadAudio() {
     this.load.audio('pistol', 'assets/audio/guns/pistol.ogg')
+  }
+
+  loadFonts() {
+    WebFont.load({
+      custom: {
+        families: ['Doom'],
+        urls: ['css/doom-font.css']
+      }
+    })
   }
 
   create() {
