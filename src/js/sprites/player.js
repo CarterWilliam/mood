@@ -11,10 +11,10 @@ const State = Object.freeze({
   DEAD: 2
 })
 
-export default class Soldier extends Killable(Sprite) {
+export default class Player extends Killable(Sprite) {
 
   constructor(config) {
-    config.key = 'soldier'
+    config.key = 'player'
     config.health = 20
     super(config)
 
@@ -136,28 +136,28 @@ export default class Soldier extends Killable(Sprite) {
   animateMovement() {
     switch(this.direction) {
       case Direction.WEST:
-        this.anims.play('soldier-move-west', true);
+        this.anims.play('player-move-west', true);
         break;
       case Direction.NORTHWEST:
-        this.anims.play('soldier-move-north-west', true);
+        this.anims.play('player-move-north-west', true);
         break;
       case Direction.NORTH:
-        this.anims.play('soldier-move-north', true);
+        this.anims.play('player-move-north', true);
         break;
       case Direction.NORTHEAST:
-        this.anims.play('soldier-move-north-east', true);
+        this.anims.play('player-move-north-east', true);
         break;
       case Direction.EAST:
-        this.anims.play('soldier-move-east', true);
+        this.anims.play('player-move-east', true);
         break;
       case Direction.SOUTHEAST:
-        this.anims.play('soldier-move-south-east', true);
+        this.anims.play('player-move-south-east', true);
         break;
       case Direction.SOUTH:
-        this.anims.play('soldier-move-south', true);
+        this.anims.play('player-move-south', true);
         break;
       case Direction.SOUTHWEST:
-        this.anims.play('soldier-move-south-west', true);
+        this.anims.play('player-move-south-west', true);
         break;
     }
   }
@@ -171,28 +171,28 @@ export default class Soldier extends Killable(Sprite) {
 
     switch(this.direction) {
       case Direction.WEST:
-        this.anims.play('soldier-shoot-west');
+        this.anims.play('player-shoot-west');
         break;
       case Direction.NORTHWEST:
-        this.anims.play('soldier-shoot-north-west');
+        this.anims.play('player-shoot-north-west');
         break;
       case Direction.NORTH:
-        this.anims.play('soldier-shoot-north');
+        this.anims.play('player-shoot-north');
         break;
       case Direction.NORTHEAST:
-        this.anims.play('soldier-shoot-north-east');
+        this.anims.play('player-shoot-north-east');
         break;
       case Direction.EAST:
-        this.anims.play('soldier-shoot-east');
+        this.anims.play('player-shoot-east');
         break;
       case Direction.SOUTHEAST:
-        this.anims.play('soldier-shoot-south-east');
+        this.anims.play('player-shoot-south-east');
         break;
       case Direction.SOUTH:
-        this.anims.play('soldier-shoot-south');
+        this.anims.play('player-shoot-south');
         break;
       case Direction.SOUTHWEST:
-        this.anims.play('soldier-shoot-south-west');
+        this.anims.play('player-shoot-south-west');
         break;
     }
     this.anims.stopOnRepeat()
@@ -212,7 +212,7 @@ export default class Soldier extends Killable(Sprite) {
   }
 
   isShootFrame(index) {
-    return (index % 7 == 5)
+    return (index >= 33 && index <= 47 && index % 2 === 1)
   }
 
   onDie() {

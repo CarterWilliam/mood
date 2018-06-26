@@ -1,7 +1,26 @@
 module.exports = function(goLoader) {
 
+  // Player
+  createConsecutiveAnimation('player', 'player-move-south', 0, 3)
+  createConsecutiveAnimation('player', 'player-move-south-west', 4, 7)
+  createConsecutiveAnimation('player', 'player-move-west', 8, 11)
+  createConsecutiveAnimation('player', 'player-move-north-west', 12, 15)
+  createConsecutiveAnimation('player', 'player-move-north', 16, 19)
+  createConsecutiveAnimation('player', 'player-move-north-east', 20, 23)
+  createConsecutiveAnimation('player', 'player-move-east', 24, 27)
+  createConsecutiveAnimation('player', 'player-move-south-east', 28, 31)
+  createAnimation('player', 'player-shoot-south', [ 32, 33, 32 ])
+  createAnimation('player', 'player-shoot-south-west', [ 34, 35, 34 ])
+  createAnimation('player', 'player-shoot-west', [ 36, 37, 36 ])
+  createAnimation('player', 'player-shoot-north-west', [ 38, 39, 38 ])
+  createAnimation('player', 'player-shoot-north', [ 40, 41, 40 ])
+  createAnimation('player', 'player-shoot-north-east', [ 42, 43, 42 ])
+  createAnimation('player', 'player-shoot-east', [ 44, 45, 44 ])
+  createAnimation('player', 'player-shoot-south-east', [ 46, 47, 46 ])
+  createAnimation('player', 'player-die', [ 48, 56, 57, 58, 59, 60, 61, 62 ], 10, 0)
+
   // Soldier
-  createAnimation('soldier', 'soldier-hang', [0, 2], 2)
+  createAnimation('soldier', 'soldier-passive', [ 0, 2 ], 2)
   createConsecutiveAnimation('soldier', 'soldier-move-south', 0, 3)
   createAnimation('soldier', 'soldier-shoot-south', [ 4, 5, 4 ])
   createConsecutiveAnimation('soldier', 'soldier-hit-south', 6, 6)
@@ -29,7 +48,7 @@ module.exports = function(goLoader) {
   createAnimation('soldier', 'soldier-die', [56, 57, 58, 59, 60], 10, 0)
 
   // Imp
-  createAnimation('imp', 'imp-hang', [0, 2], 2)
+  createAnimation('imp', 'imp-passive', [0, 2], 2)
   createConsecutiveAnimation('imp', 'imp-move-south', 0, 3)
   createAnimation('imp', 'imp-shoot-south', [ 4, 5, 6 ], 8, 0)
   createConsecutiveAnimation('imp', 'imp-hit-south', 7, 7)
@@ -57,9 +76,10 @@ module.exports = function(goLoader) {
   createConsecutiveAnimation('imp', 'imp-die', 65, 68, 0)
 
   function createConsecutiveAnimation(spriteSheetId, id, fromIndex, toIndex, repeat) {
+    let frames = goLoader.anims.generateFrameNumbers(spriteSheetId, { start: fromIndex, end: toIndex })
     goLoader.anims.create({
       key: id,
-      frames: goLoader.anims.generateFrameNumbers(spriteSheetId, { start: fromIndex, end: toIndex }),
+      frames: frames,
       frameRate: 10,
       repeat: repeat
     });

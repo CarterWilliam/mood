@@ -10,8 +10,6 @@ export default class Sprite extends Phaser.GameObjects.Sprite {
     this.body.setSize(30, 40)
     this.body.setOffset(15,30)
     this.body.setCollideWorldBounds(true)
-
-    this.anims.play(`${this.assetKey}-hang`, true)
   }
 
 }

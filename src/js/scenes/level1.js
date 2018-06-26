@@ -1,5 +1,5 @@
 import { Depth } from 'configuration/constants'
-import Soldier from 'sprites/soldier'
+import Player from 'sprites/player'
 import Enemy from 'sprites/enemy'
 import Imp from 'sprites/imp'
 import Projectiles from 'sprites/projectiles/projectiles'
@@ -39,9 +39,9 @@ export default class GameScene extends Phaser.Scene {
 
     let playerProjectiles = new Projectiles(this);
 
-    let player = new Soldier({
+    let player = new Player({
       scene: this,
-      key: 'soldier',
+      key: 'player',
       x: 32*3, y: 32*30,
       projectiles: playerProjectiles
     })
