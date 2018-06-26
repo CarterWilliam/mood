@@ -7,8 +7,8 @@ export default class Sprite extends Phaser.GameObjects.Sprite {
 
     this.assetKey = config.key
 
-    this.body.setSize(30, 40)
-    this.body.setOffset(15,30)
+    this.body.setSize(30, 56)
+    this.body.setOffset(15,2)
     this.body.setCollideWorldBounds(true)
   }
 
