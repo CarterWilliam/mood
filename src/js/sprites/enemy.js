@@ -11,8 +11,9 @@ const State = Object.freeze({
   PASSIVE: 0,
   AGGRESSIVE: 1,
   SHOOTING: 2,
-  BERSERK: 3,
-  DEAD: 4
+  CHACHA: 3,
+  BERSERK: 4,
+  DEAD: 5
 })
 
 export default class Enemy extends Killable(Sprite) {
@@ -41,6 +42,9 @@ export default class Enemy extends Killable(Sprite) {
       case State.AGGRESSIVE:
         this.aggressiveUpdate(time, player)
         break
+      case State.CHACHA:
+        this.chaChaUpdate()
+        break
     }
   }
 
@@ -55,6 +59,12 @@ export default class Enemy extends Killable(Sprite) {
       this.shoot(time, player)
     } else {
       this.moveTo(player)
+    }
+  }
+
+  chaChaUpdate() {
+    if (!this.anims.isPlaying) {
+      this.state = State.AGGRESSIVE
     }
   }
 
@@ -123,7 +133,8 @@ export default class Enemy extends Killable(Sprite) {
   }
 
   onDamage() {
-    this.state = State.AGGRESSIVE
+    this.state = State.CHACHA
+    this.anims.play(`${this.assetKey}-hit-${directionKey(this.direction)}`)
   }
 
   onDie() {

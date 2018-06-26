@@ -10,9 +10,7 @@ export default Killable => class extends Killable {
   }
 
   takeDamage(hitPoints) {
-    // console.log(`takeDamage(${hitPoints})`)
     this.health -= hitPoints
-    // console.log(`health: ${this.health}`)
     if (this.health <= 0) {
       this.die()
     } else {
