@@ -5,6 +5,7 @@ import Imp from 'sprites/imp'
 import Projectiles from 'sprites/projectiles/projectiles'
 import createAnimations from '../animations/create'
 
+const TILE_SIZE = 24
 const SCALE = 1
 
 export default class GameScene extends Phaser.Scene {
@@ -18,22 +19,26 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    let map = this.make.tilemap({ key: 'level1-map' });
-    let tileset = map.addTilesetImage('catriona', 'level1-tiles')
+    let map = this.make.tilemap({ key: 'map-futuristic' });
+    let tileset = map.addTilesetImage('futuristic', 'tiles-futuristic')
 
     let floor = map.createStaticLayer('floor', tileset, 0, 0);
     floor.setCollisionByProperty({ collide: true });
     floor.setScale(SCALE, SCALE)
 
-    let onTheFloor = map.createStaticLayer('onthefloor', tileset, 0, 0);
-    onTheFloor.setCollisionByProperty({ collide: true });
-    onTheFloor.setScale(SCALE, SCALE)
+    let lowObstacles = map.createStaticLayer('obstacle-low', tileset, 0, 0);
+    lowObstacles.setCollisionByProperty({ collide: true });
+    lowObstacles.setScale(SCALE, SCALE)
+
+    let highObstacles = map.createStaticLayer('obstacle-high', tileset, 0, 0);
+    highObstacles.setCollisionByProperty({ collide: true });
+    highObstacles.setScale(SCALE, SCALE)
 
     let foreground = map.createStaticLayer('foreground', tileset, 0, 0);
     foreground.setScale(SCALE, SCALE)
     foreground.setDepth(Depth.FOREGROUND)
 
-    this.physics.world.setBounds(0, 0, 64*32*SCALE, 32*32*SCALE)
+    this.physics.world.setBounds(0, 0, 64*TILE_SIZE*SCALE, 32*TILE_SIZE*SCALE)
 
     createAnimations(this)
 
@@ -42,7 +47,7 @@ export default class GameScene extends Phaser.Scene {
     let player = new Player({
       scene: this,
       key: 'player',
-      x: 32*3, y: 32*30,
+      x: TILE_SIZE*2, y: TILE_SIZE*25,
       projectiles: playerProjectiles
     })
 
@@ -53,7 +58,7 @@ export default class GameScene extends Phaser.Scene {
     let imp = new Enemy({
       scene: this,
       key: 'imp',
-      x: 32*3/2, y: 32*24,
+      x: TILE_SIZE*4, y: TILE_SIZE*17.6,
       health: 60,
       speed: 50,
       sight: 100,
@@ -66,12 +71,17 @@ export default class GameScene extends Phaser.Scene {
       shootDuration: 4000})
 
     this.physics.add.collider(player, floor);
-    this.physics.add.collider(player, onTheFloor);
+    this.physics.add.collider(player, lowObstacles);
+    this.physics.add.collider(player, highObstacles);
     this.physics.add.collider(imp, floor);
-    this.physics.add.collider(imp, onTheFloor);
+    this.physics.add.collider(imp, lowObstacles);
+    this.physics.add.collider(imp, highObstacles);
     this.physics.add.collider(player, imp);
 
     this.physics.add.collider(playerProjectiles, floor, function(projectile, tile) {
+      projectile.destroy()
+    });
+    this.physics.add.collider(playerProjectiles, highObstacles, function(projectile, tile) {
       projectile.destroy()
     });
 
@@ -81,6 +91,9 @@ export default class GameScene extends Phaser.Scene {
     })
 
     this.physics.add.collider(enemyProjectiles, floor, function(projectile, tile) {
+      projectile.destroy()
+    })
+    this.physics.add.collider(enemyProjectiles, highObstacles, function(projectile, tile) {
       projectile.destroy()
     })
 

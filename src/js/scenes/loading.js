@@ -41,8 +41,8 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   loadMaps() {
-    this.load.image('level1-tiles', 'assets/maps/level1.png')
-    this.load.tilemapTiledJSON('level1-map', 'assets/maps/level1.json')
+    this.load.image('tiles-futuristic', 'assets/maps/futuristic.png')
+    this.load.tilemapTiledJSON('map-futuristic', 'assets/maps/futuristic.json')
   }
 
   loadSprites() {
