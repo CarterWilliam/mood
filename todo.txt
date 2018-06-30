@@ -1,0 +1,14 @@
+- Level recipe
+- Ammo
+- Item pickup
+- Shotgun
+- Switch weapons
+- ChainGun
+- Create shotgun soldier/Commando
+- HUD
+- projectile origins
+- Sprite body
+- Enemy AI - follow path to player
+  - create graph of environment?
+- Doors/Switches
+- Animated tiles
