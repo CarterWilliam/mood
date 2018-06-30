@@ -12,3 +12,6 @@
   - create graph of environment?
 - Doors/Switches
 - Animated tiles
+
+BUGS
+- dead bodies appear above walls/ceilings

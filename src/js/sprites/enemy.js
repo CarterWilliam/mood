@@ -114,7 +114,7 @@ export default class Enemy extends Killable(Sprite) {
     this.body.setVelocityX(Math.cos(this.direction) * this.speed)
     this.body.setVelocityY(Math.sin(this.direction) * this.speed)
 
-    this.anims.play(`${this.assetKey}-move-${directionKey(this.direction)}`)
+    this.anims.play(`${this.assetKey}-move-${directionKey(this.direction)}`, true)
   }
 
   angleToPlayer(player) {
