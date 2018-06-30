@@ -1,0 +1,12 @@
+{
+  "key": "imp",
+  "health": 60,
+  "speed": 50,
+  "sight": 100,
+  "projectileConfig": {
+    "type": "fireball",
+    "speed": 300,
+    "damage": 20
+  },
+  "shootDuration": 4000
+}

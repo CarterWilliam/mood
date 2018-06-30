@@ -1,0 +1,12 @@
+{
+  "key": "soldier",
+  "health": 30,
+  "speed": 40,
+  "sight": 100,
+  "projectileConfig": {
+    "type": "fireball",
+    "speed": 300,
+    "damage": 20
+  },
+  "shootDuration": 4000
+}

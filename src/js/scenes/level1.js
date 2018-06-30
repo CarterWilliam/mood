@@ -1,7 +1,6 @@
 import { Depth } from 'configuration/constants'
 import Player from 'sprites/player'
-import Enemy from 'sprites/enemy'
-import Imp from 'sprites/imp'
+import Enemies from 'sprites/enemies'
 import Projectiles from 'sprites/projectiles/projectiles'
 import createAnimations from '../animations/create'
 
@@ -15,7 +14,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.cursors = null
     this.player = null
-    this.imp = null
+    this.enemies = null
   }
 
   create() {
@@ -54,29 +53,17 @@ export default class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(player, true)
 
     let enemyProjectiles = new Projectiles(this)
-
-    let imp = new Enemy({
-      scene: this,
-      key: 'imp',
-      x: TILE_SIZE*4, y: TILE_SIZE*17.6,
-      health: 60,
-      speed: 50,
-      sight: 100,
-      projectiles: enemyProjectiles,
-      projectileConfig: {
-        type: 'fireball',
-        speed: 300,
-        damage: 20
-      },
-      shootDuration: 4000})
+    let enemies = new Enemies(this, enemyProjectiles)
+    enemies.add('imp', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
+    enemies.add('imp', { x: TILE_SIZE*4, y: TILE_SIZE*17.6 })
 
     this.physics.add.collider(player, floor);
     this.physics.add.collider(player, lowObstacles);
     this.physics.add.collider(player, highObstacles);
-    this.physics.add.collider(imp, floor);
-    this.physics.add.collider(imp, lowObstacles);
-    this.physics.add.collider(imp, highObstacles);
-    this.physics.add.collider(player, imp);
+    this.physics.add.collider(enemies, floor);
+    this.physics.add.collider(enemies, lowObstacles);
+    this.physics.add.collider(enemies, highObstacles);
+    this.physics.add.collider(player, enemies);
 
     this.physics.add.collider(playerProjectiles, floor, function(projectile, tile) {
       projectile.destroy()
@@ -85,7 +72,7 @@ export default class GameScene extends Phaser.Scene {
       projectile.destroy()
     });
 
-    this.physics.add.collider(playerProjectiles, imp, function(projectile, imp) {
+    this.physics.add.collider(playerProjectiles, enemies, function(projectile, imp) {
       imp.takeDamage(projectile.damage)
       projectile.destroy()
     })
@@ -103,12 +90,14 @@ export default class GameScene extends Phaser.Scene {
     })
 
     this.player = player
-    this.imp = imp
+    this.enemies = enemies
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   update(time) {
     this.player.update(this.cursors)
-    this.imp.update(time, this.player)
+    this.enemies.getChildren().forEach(enemy => {
+      enemy.update(time, this.player)
+    })
   }
 }

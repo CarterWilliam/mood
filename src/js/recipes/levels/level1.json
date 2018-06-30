@@ -1,0 +1,13 @@
+{
+  "map": {
+    "tilemap-key": "map-futuristic",
+    "image-key": "tiles-futuristic"
+  },
+  "enemies": [
+    {
+      "key": "imp",
+      "location": { "x": 4, "y": 17.6 }
+    }
+  ],
+  "items": []
+}
