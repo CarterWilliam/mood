@@ -4,8 +4,8 @@
   "speed": 40,
   "sight": 100,
   "projectileConfig": {
-    "type": "fireball",
-    "speed": 300,
+    "type": "bullet",
+    "speed": 600,
     "damage": 20
   },
   "shootDuration": 4000

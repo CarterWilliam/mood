@@ -15,7 +15,7 @@ export default class Player extends Killable(Sprite) {
 
   constructor(config) {
     config.key = 'player'
-    config.health = 20
+    config.health = 100
     super(config)
 
     config.scene.physics.world.enable(this);

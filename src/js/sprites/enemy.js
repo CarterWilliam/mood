@@ -50,8 +50,13 @@ export default class Enemy extends Killable(Sprite) {
 
   passiveUpdate(time, player) {
     if (Phaser.Math.Distance.Between(this.x, this.y, player.x, player.y) < this.sight) {
-      this.state = State.AGGRESSIVE
+      this.turnAggressive()
     }
+  }
+
+  turnAggressive() {
+    this.state = State.AGGRESSIVE
+    this.scene.sound.play(`${this.assetKey}-sight`)
   }
 
   aggressiveUpdate(time, player) {

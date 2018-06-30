@@ -54,7 +54,9 @@ export default class GameScene extends Phaser.Scene {
 
     let enemyProjectiles = new Projectiles(this)
     let enemies = new Enemies(this, enemyProjectiles)
-    enemies.add('imp', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
+    enemies.add('soldier', { x: TILE_SIZE*2, y: TILE_SIZE*4 })
+    enemies.add('soldier', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
+    enemies.add('soldier', { x: TILE_SIZE*13, y: TILE_SIZE*9 })
     enemies.add('imp', { x: TILE_SIZE*4, y: TILE_SIZE*17.6 })
 
     this.physics.add.collider(player, floor);

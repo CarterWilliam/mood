@@ -57,8 +57,14 @@ export default class LoadingScene extends Phaser.Scene {
   loadAudio() {
     this.load.audio('pistol', 'assets/audio/guns/pistol.ogg')
 
+    this.load.audio('soldier-sight', 'assets/audio/enemy/soldier/sight.ogg')
+    this.load.audio('soldier-hurt', 'assets/audio/enemy/soldier/injured.ogg')
+    this.load.audio('soldier-die', 'assets/audio/enemy/soldier/death1.ogg')
+    
+    this.load.audio('imp-sight', 'assets/audio/enemy/imp/sight.ogg')
     this.load.audio('imp-die', 'assets/audio/enemy/imp/death.ogg')
     this.load.audio('imp-hurt', 'assets/audio/enemy/imp/pain.ogg')
+
     this.load.audio('player-die', 'assets/audio/player/death.ogg')
     this.load.audio('player-hurt', 'assets/audio/player/pain.ogg')
   }
