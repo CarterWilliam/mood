@@ -1,18 +1,21 @@
-- HUD
+- HUD /
 - Level recipe
 - Ammo
 - Item pickup
-- Shotgun
+- Shotgun shooting
 - Switch weapons
 - ChainGun
 - Create shotgun soldier/Commando
 - projectile origins
 - Sprite body
 - Enemy AI - follow path to player
-  - create graph of environment?
-- Doors/Switches
+  - https://phaser.io/news/2016/02/how-to-use-pathfinding-in-phaser
+  - https://phaser.io/news/2018/03/pathfinding-and-phaser-3
+- Doors
+- Switches
 - Animated tiles
 - Restart on die
+- Add guns to player animations
 
 BUGS
 - dead bodies appear above walls/ceilings

@@ -80,6 +80,12 @@ export default class LoadingScene extends Phaser.Scene {
         urls: ['css/doom-font.css']
       }
     })
+    WebFont.load({
+      custom: {
+        families: ['Square'],
+        urls: ['css/square-font.css']
+      }
+    })
   }
 
   create() {

@@ -31,6 +31,7 @@ export default class Player extends Killable(Sprite) {
 
     this.direction = Direction.SOUTH
     this.state = State.NORMAL
+    this.ammo = 50
   }
 
   update(cursors) {
@@ -47,7 +48,7 @@ export default class Player extends Killable(Sprite) {
   }
 
   action(cursors) {
-    if (cursors.space.isDown) {
+    if (cursors.space.isDown && this.canFire()) {
       this.startFiring(cursors)
     } else {
       this.move(cursors)
@@ -163,19 +164,20 @@ export default class Player extends Killable(Sprite) {
   }
 
   startFiring(cursors) {
-    this.state = State.FIRING
-    this.fired = false
 
-    this.body.setVelocityX(0)
-    this.body.setVelocityY(0)
+      this.state = State.FIRING
+      this.fired = false
 
-    switch(this.direction) {
-      case Direction.WEST:
-        this.anims.play('player-shoot-west');
-        break;
-      case Direction.NORTHWEST:
-        this.anims.play('player-shoot-north-west');
-        break;
+      this.body.setVelocityX(0)
+      this.body.setVelocityY(0)
+
+      switch(this.direction) {
+        case Direction.WEST:
+          this.anims.play('player-shoot-west');
+          break;
+        case Direction.NORTHWEST:
+          this.anims.play('player-shoot-north-west');
+          break;
       case Direction.NORTH:
         this.anims.play('player-shoot-north');
         break;
@@ -198,10 +200,16 @@ export default class Player extends Killable(Sprite) {
     this.anims.stopOnRepeat()
   }
 
+  canFire() {
+    return this.ammo > 0
+  }
+
   whileFiring() {
     if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
       this.projectiles.addBullet(this, { x: this.x, y: this.y }, this.direction)
       this.scene.sound.play('pistol')
+      this.ammo -= 1
+      this.scene.events.emit('ammoChange', this.ammo)
       this.fired = true
     }
 
