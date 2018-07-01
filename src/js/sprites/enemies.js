@@ -10,6 +10,7 @@ export default class Enemies extends Phaser.GameObjects.Group {
     this.projectiles = enemyProjectiles;
   }
 
+
   add(key, position) {
     let config = baseConfig(key)
     config.scene = this.scene

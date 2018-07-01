@@ -206,7 +206,12 @@ export default class Player extends Killable(Sprite) {
 
   whileFiring() {
     if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
-      this.projectiles.addBullet(this, { x: this.x, y: this.y }, this.direction)
+      this.projectiles.addProjectile({
+        owner: this,
+        type: 'bullet',
+        damage: 10,
+        direction: this.direction,
+        speed: 600})
       this.scene.sound.play('pistol')
       this.ammo -= 1
       this.scene.events.emit('ammoChange', this.ammo)

@@ -68,27 +68,27 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, enemies);
 
     this.physics.add.collider(playerProjectiles, floor, function(projectile, tile) {
-      projectile.destroy()
+      projectile.impact()
     });
     this.physics.add.collider(playerProjectiles, highObstacles, function(projectile, tile) {
-      projectile.destroy()
+      projectile.impact()
     });
 
     this.physics.add.collider(playerProjectiles, enemies, function(projectile, imp) {
       imp.takeDamage(projectile.damage)
-      projectile.destroy()
+      projectile.impact()
     })
 
     this.physics.add.collider(enemyProjectiles, floor, function(projectile, tile) {
-      projectile.destroy()
+      projectile.impact()
     })
     this.physics.add.collider(enemyProjectiles, highObstacles, function(projectile, tile) {
-      projectile.destroy()
+      projectile.impact()
     })
 
     this.physics.add.collider(enemyProjectiles, player, function(projectile, tile) {
       player.takeDamage(projectile.damage)
-      projectile.destroy()
+      projectile.impact()
     })
 
     let hud = this.scene.launch('hud')

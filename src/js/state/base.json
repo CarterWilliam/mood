@@ -1,0 +1,10 @@
+{
+  "health": 100,
+  "armour": 0,
+  "ammo": {
+    "bullets": { "left": 50, "max": 200 },
+    "shells": { "left": 0, "max": 50 },
+    "rockets": { "left": 0, "max": 50 },
+    "plasma": { "left": 0, "max": 200 }
+  }
+}

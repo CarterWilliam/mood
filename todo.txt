@@ -1,6 +1,6 @@
 - HUD /
 - Level recipe
-- Ammo
+- Ammo /
 - Item pickup
 - Shotgun shooting
 - Switch weapons
@@ -16,6 +16,7 @@
 - Animated tiles
 - Restart on die
 - Add guns to player animations
+- music
 
 BUGS
 - dead bodies appear above walls/ceilings

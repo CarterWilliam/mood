@@ -55,7 +55,7 @@ export default class LoadingScene extends Phaser.Scene {
     this.load.spritesheet('imp', 'assets/images/imp.png', { frameWidth: 60, frameHeight: 60, endFrame: 68 })
 
     this.load.image('bullet', 'assets/images/bullet.png')
-    this.load.spritesheet('fireball', 'assets/images/fireball.png', { frameWidth: 15, frameHeight: 15 })
+    this.load.spritesheet('fireball', 'assets/images/fireball.png', { frameWidth: 51, frameHeight: 51 })
   }
 
   loadAudio() {

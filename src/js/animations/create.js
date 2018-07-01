@@ -74,6 +74,8 @@ module.exports = function(goLoader) {
   createAnimation('imp', 'imp-shoot-north-east', [ 58, 59, 60 ], 8, 0)
   createConsecutiveAnimation('imp', 'imp-hit-north-east', 61, 61)
   createConsecutiveAnimation('imp', 'imp-die', 65, 68, 0)
+  createAnimation('fireball', 'fireball-impact', [ 2, 3, 4 ], 8, 0)
+
 
   function createConsecutiveAnimation(spriteSheetId, id, fromIndex, toIndex, repeat) {
     let frames = goLoader.anims.generateFrameNumbers(spriteSheetId, { start: fromIndex, end: toIndex })
