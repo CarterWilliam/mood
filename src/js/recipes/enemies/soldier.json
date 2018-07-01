@@ -6,7 +6,7 @@
   "projectileConfig": {
     "type": "bullet",
     "speed": 600,
-    "damage": 20
+    "damage": 4
   },
   "shootDuration": 4000
 }

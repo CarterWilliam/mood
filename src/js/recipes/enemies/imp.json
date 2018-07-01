@@ -6,7 +6,7 @@
   "projectileConfig": {
     "type": "fireball",
     "speed": 300,
-    "damage": 20
+    "damage": 10
   },
   "shootDuration": 4000
 }

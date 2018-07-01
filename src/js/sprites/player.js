@@ -215,7 +215,12 @@ export default class Player extends Killable(Sprite) {
     return (index >= 33 && index <= 47 && index % 2 === 1)
   }
 
+  onDamage() {
+    this.scene.events.emit('healthChange', this.health)
+  }
+
   onDie() {
+    this.scene.events.emit('healthChange', this.health)
     this.state = State.DEAD
   }
 

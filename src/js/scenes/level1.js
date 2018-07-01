@@ -91,6 +91,8 @@ export default class GameScene extends Phaser.Scene {
       projectile.destroy()
     })
 
+    let hud = this.scene.launch('hud')
+
     this.player = player
     this.enemies = enemies
     this.cursors = this.input.keyboard.createCursorKeys();

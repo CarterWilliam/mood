@@ -12,6 +12,7 @@ export default Killable => class extends Killable {
   takeDamage(hitPoints) {
     this.health -= hitPoints
     if (this.health <= 0) {
+      this.health = 0
       this.die()
     } else {
       this.playSound('hurt')

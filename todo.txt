@@ -1,3 +1,4 @@
+- HUD
 - Level recipe
 - Ammo
 - Item pickup
@@ -5,13 +6,14 @@
 - Switch weapons
 - ChainGun
 - Create shotgun soldier/Commando
-- HUD
 - projectile origins
 - Sprite body
 - Enemy AI - follow path to player
   - create graph of environment?
 - Doors/Switches
 - Animated tiles
+- Restart on die
 
 BUGS
 - dead bodies appear above walls/ceilings
+- projectiles don't disappear on colliding with world bounds

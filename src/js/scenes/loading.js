@@ -12,12 +12,11 @@ export default class LoadingScene extends Phaser.Scene {
 
     this.createLoadBar()
 
+    this.loadFonts()
+    this.loadImages()
     this.loadMaps()
     this.loadSprites()
     this.loadAudio()
-    this.loadFonts()
-
-    this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
   }
 
   createLoadBar() {
@@ -40,6 +39,11 @@ export default class LoadingScene extends Phaser.Scene {
     })
   }
 
+  loadImages() {
+    this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
+    this.load.image('hud', 'assets/images/hud.png')
+  }
+
   loadMaps() {
     this.load.image('tiles-futuristic', 'assets/maps/futuristic.png')
     this.load.tilemapTiledJSON('map-futuristic', 'assets/maps/futuristic.json')
@@ -60,7 +64,7 @@ export default class LoadingScene extends Phaser.Scene {
     this.load.audio('soldier-sight', 'assets/audio/enemy/soldier/sight.ogg')
     this.load.audio('soldier-hurt', 'assets/audio/enemy/soldier/injured.ogg')
     this.load.audio('soldier-die', 'assets/audio/enemy/soldier/death1.ogg')
-    
+
     this.load.audio('imp-sight', 'assets/audio/enemy/imp/sight.ogg')
     this.load.audio('imp-die', 'assets/audio/enemy/imp/death.ogg')
     this.load.audio('imp-hurt', 'assets/audio/enemy/imp/pain.ogg')
