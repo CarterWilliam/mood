@@ -1,3 +1,5 @@
+FEATURES
+--------
 - HUD /
 - Level recipe
 - Ammo /
@@ -15,9 +17,19 @@
 - Switches
 - Animated tiles
 - Restart on die
-- Add guns to player animations
 - music
 
+DESIGN
+------
+- Level design
+- Splash/Menu screen should say "MOOD" not "DOOM".
+- Add different guns to player sprite animations
+
 BUGS
+----
 - dead bodies appear above walls/ceilings
 - projectiles don't disappear on colliding with world bounds
+
+ADMIN
+-----
+- README tilemap editing

@@ -1,7 +1,7 @@
 {
-  "name": "catriona",
-  "version": "1.0.0",
-  "description": "",
+  "name": "mood",
+  "version": "0.0.1",
+  "description": "Top-down doom built with Phaser",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack && webpack-dev-server",

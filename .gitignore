@@ -6,6 +6,5 @@
 npm-debug.log
 
 # Assets
-/raw-assets/
+/raw-assets/ignore/
 *.xcf # Gimp
-*.tmx # Tiled
