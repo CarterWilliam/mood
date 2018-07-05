@@ -1,8 +1,9 @@
 import { Depth } from 'configuration/constants'
 import Player from 'sprites/player'
 import Enemies from 'sprites/enemies'
+import Items from 'sprites/items'
 import Projectiles from 'sprites/projectiles/projectiles'
-import createAnimations from '../animations/create'
+import createAnimations from 'animations/create'
 
 const TILE_SIZE = 24
 const SCALE = 1
@@ -52,8 +53,10 @@ export default class GameScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(player, true)
 
+    let items = new Items(this)
+
     let enemyProjectiles = new Projectiles(this)
-    let enemies = new Enemies(this, enemyProjectiles)
+    let enemies = new Enemies(this, enemyProjectiles, items)
     enemies.add('soldier', { x: TILE_SIZE*2, y: TILE_SIZE*4 })
     enemies.add('soldier', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
     enemies.add('soldier', { x: TILE_SIZE*13, y: TILE_SIZE*9 })
@@ -89,6 +92,10 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(enemyProjectiles, player, function(projectile, tile) {
       player.takeDamage(projectile.damage)
       projectile.impact()
+    })
+
+    this.physics.add.collider(items, player, function(item, tile) {
+      item.onPickup(player)
     })
 
     let hud = this.scene.launch('hud')

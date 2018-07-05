@@ -15,8 +15,9 @@ FEATURES
   - https://phaser.io/news/2018/03/pathfinding-and-phaser-3
 - Doors
 - Switches
-- Animated tiles
 - Restart on die
+- credits scene
+- Animated tiles
 - music
 
 DESIGN

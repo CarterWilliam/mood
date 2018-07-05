@@ -5,9 +5,10 @@ let ImpBaseConfig = require('recipes/enemies/imp.json')
 
 export default class Enemies extends Phaser.GameObjects.Group {
 
-  constructor(scene, enemyProjectiles) {
+  constructor(scene, enemyProjectiles, items) {
     super(scene)
-    this.projectiles = enemyProjectiles;
+    this.projectiles = enemyProjectiles
+    this.items = items
   }
 
 
@@ -15,6 +16,7 @@ export default class Enemies extends Phaser.GameObjects.Group {
     let config = baseConfig(key)
     config.scene = this.scene
     config.projectiles = this.projectiles
+    config.items = this.items
     config.x = position.x
     config.y = position.y
     let enemy = new Enemy(config)

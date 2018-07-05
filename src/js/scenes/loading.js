@@ -42,6 +42,7 @@ export default class LoadingScene extends Phaser.Scene {
   loadImages() {
     this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
     this.load.image('hud', 'assets/images/hud.png')
+    this.load.image('clip', 'assets/images/items/clip.png')
   }
 
   loadMaps() {
@@ -71,6 +72,8 @@ export default class LoadingScene extends Phaser.Scene {
 
     this.load.audio('player-die', 'assets/audio/player/death.ogg')
     this.load.audio('player-hurt', 'assets/audio/player/pain.ogg')
+
+    this.load.audio('weapon-pickup', 'assets/audio/player/weapon-pickup.ogg')
   }
 
   loadFonts() {
