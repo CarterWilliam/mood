@@ -1,5 +1,6 @@
 import { Depth, Direction } from 'configuration/constants'
-import Killable from './killable'
+import BackPackable from 'sprites/backpackable'
+import Killable from 'sprites/killable'
 import Sprite from './sprite'
 
 const velocity = 160;
@@ -11,7 +12,7 @@ const State = Object.freeze({
   DEAD: 2
 })
 
-export default class Player extends Killable(Sprite) {
+export default class Player extends BackPackable(Killable(Sprite)) {
 
   constructor(config) {
     config.key = 'player'
@@ -21,8 +22,8 @@ export default class Player extends Killable(Sprite) {
     config.scene.physics.world.enable(this);
     config.scene.add.existing(this);
 
-    this.body.setSize(30, 30)
-    this.body.setOffset(15,30)
+    this.body.setSize(30, 40)
+    this.body.setOffset(15, 20)
     this.body.setCollideWorldBounds(true)
 
     this.setDepth(Depth.SPRITE)
@@ -31,7 +32,6 @@ export default class Player extends Killable(Sprite) {
 
     this.direction = Direction.SOUTH
     this.state = State.NORMAL
-    this.ammo = 50
   }
 
   update(cursors) {
@@ -200,10 +200,6 @@ export default class Player extends Killable(Sprite) {
     this.anims.stopOnRepeat()
   }
 
-  canFire() {
-    return this.ammo > 0
-  }
-
   whileFiring() {
     if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
       this.projectiles.addProjectile({
@@ -213,8 +209,8 @@ export default class Player extends Killable(Sprite) {
         direction: this.direction,
         speed: 600})
       this.scene.sound.play('pistol')
-      this.ammo -= 1
-      this.scene.events.emit('ammoChange', this.ammo)
+      this.bullets -= 1
+      this.scene.events.emit('ammoChange', this.bullets)
       this.fired = true
     }
 

@@ -1,0 +1,7 @@
+{
+  "key": "clip",
+  "itemType": "ammo",
+  "ammoType": "bullet",
+  "units": 10,
+  "onPickUpAudio": "weapon-pickup"
+}

@@ -8,5 +8,9 @@
     "speed": 600,
     "damage": 4
   },
-  "shootDuration": 4000
+  "shootDuration": 4000,
+  "itemDrop": {
+    "itemKey": "clip",
+    "offset": { "x": 0, "y": 10 }
+  }
 }

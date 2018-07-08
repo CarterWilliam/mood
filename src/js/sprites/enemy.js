@@ -147,16 +147,17 @@ export default class Enemy extends Killable(Sprite) {
   }
 
   onDie() {
-    let _this = this
     this.state = State.DEAD
-    this.on('animationcomplete', function() {
-      console.log("DYING OVER")
-      _this.items.add(new Item({
-        scene: _this.scene,
-        x: _this.x,
-        y: _this.y,
-        key: 'clip'
-      }))
-    })
+    if (this.itemDrop) {
+      let _this = this
+      this.on('animationcomplete', function() {
+        _this.items.add(new Item({
+          key: _this.itemDrop.itemKey,
+          scene: _this.scene,
+          x: _this.x + _this.itemDrop.offset.x,
+          y: _this.y + _this.itemDrop.offset.y
+        }))
+      })
+    }
   }
 }
