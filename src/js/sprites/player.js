@@ -1,5 +1,5 @@
 import { Depth, Direction } from 'configuration/constants'
-import BackPackable from 'sprites/backpackable'
+import GunCarrying from 'sprites/guncarrying'
 import Killable from 'sprites/killable'
 import Sprite from './sprite'
 
@@ -12,7 +12,7 @@ const State = Object.freeze({
   DEAD: 2
 })
 
-export default class Player extends BackPackable(Killable(Sprite)) {
+export default class Player extends GunCarrying(Killable(Sprite)) {
 
   constructor(config) {
     config.key = 'player'
@@ -202,15 +202,7 @@ export default class Player extends BackPackable(Killable(Sprite)) {
 
   whileFiring() {
     if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
-      this.projectiles.addProjectile({
-        owner: this,
-        type: 'bullet',
-        damage: 10,
-        direction: this.direction,
-        speed: 600})
-      this.scene.sound.play('pistol')
-      this.bullets -= 1
-      this.scene.events.emit('ammoChange', this.bullets)
+      this.gun.fire()
       this.fired = true
     }
 

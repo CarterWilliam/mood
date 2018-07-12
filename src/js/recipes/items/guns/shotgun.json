@@ -1,0 +1,15 @@
+{
+  "key": "shotgun",
+  "itemType": "gun",
+  "ammoType": "shell",
+  "ammoCost": 1,
+  "ammoUnits": 10,
+  "fireInterval": 2000,
+  "projectile": {
+    "type": "bullet",
+    "burst": 4,
+    "speed": 600,
+    "damage": 5
+  },
+  "onPickUpAudio": "weapon-pickup"
+}

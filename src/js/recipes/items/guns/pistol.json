@@ -1,0 +1,14 @@
+{
+  "key": "pistol",
+  "itemType": "gun",
+  "ammoType": "bullets",
+  "ammoCost": 1,
+  "ammoUnits": 10,
+  "fireInterval": 1000,
+  "projectile": {
+    "type": "bullet",
+    "speed": 600,
+    "damage": 10
+  },
+  "onPickUpAudio": "weapon-pickup"
+}

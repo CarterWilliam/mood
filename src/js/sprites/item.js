@@ -18,7 +18,7 @@ export default class Item extends Phaser.GameObjects.Sprite {
   onPickup(player) {
     switch(this.itemType) {
       case 'ammo':
-        player.gainAmmo(this.ammoType, this.units)
+        player.ammoBag.gainAmmo(this.ammoType, this.units)
         if (this.onPickUpAudio) {
           this.scene.sound.play(this.onPickUpAudio)
         }
