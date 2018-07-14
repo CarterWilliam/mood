@@ -1,6 +1,7 @@
 {
   "key": "shotgun",
   "itemType": "gun",
+  "armsIndex": "3",
   "ammoType": "shells",
   "ammoCost": 1,
   "ammoUnits": 8,

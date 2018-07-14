@@ -51,6 +51,11 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
     if (cursors.space.isDown && this.canFire()) {
       this.startFiring(cursors)
     } else {
+      if (cursors.pistol.isDown) {
+        this.equip("pistol")
+      } else if (cursors.shotgun.isDown) {
+        this.equip("shotgun")
+      }
       this.move(cursors)
     }
   }

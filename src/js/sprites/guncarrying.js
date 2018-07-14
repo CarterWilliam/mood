@@ -27,8 +27,8 @@ export default GunCarrying => class extends GunCarrying {
   pickUp(weaponItem) {
     if (!this.has(weaponItem.key)) {
       this.guns[weaponItem.key] = new Gun(weaponItem, this.ammoBag, this.projectiles, this.scene.sound)
-      this.equipped = this.guns[weaponItem.key]
-      this.scene.events.emit('weaponChange', this.equipped.ammoType, this.ammoBag.remaining(this.equipped.ammoType))
+      this.equip(weaponItem.key)
+      this.scene.events.emit('gainWeapon', weaponItem.armsIndex)
     }
     this.ammoBag.gainAmmo(weaponItem.ammoType, weaponItem.ammoUnits)
   }
@@ -37,10 +37,10 @@ export default GunCarrying => class extends GunCarrying {
     return this.ammoBag.has(this.equipped.ammoType, this.equipped.ammoCost)
   }
 
-  equip(weaponKey, playSound) {
+  equip(weaponKey) {
     if (this.has(weaponKey)) {
-      this.equipped = this.guns[weaponItem.key]
-      if (playSound) this.scene.sound.play('weapon-pickup')
+      this.equipped = this.guns[weaponKey]
+      this.scene.events.emit('weaponChange', this.equipped.ammoType, this.ammoBag.remaining(this.equipped.ammoType))
     }
   }
 }

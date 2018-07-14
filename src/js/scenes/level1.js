@@ -8,6 +8,8 @@ import createAnimations from 'animations/create'
 const TILE_SIZE = 24
 const SCALE = 1
 
+const KeyCodes = Phaser.Input.Keyboard.KeyCodes
+
 export default class GameScene extends Phaser.Scene {
 
   constructor() {
@@ -55,14 +57,19 @@ export default class GameScene extends Phaser.Scene {
 
     let items = new Items(this)
 
-    items.add('shotgun', { x: TILE_SIZE*16, y: TILE_SIZE*24 })
+    items.add('shotgun', { x: TILE_SIZE*6, y: TILE_SIZE*17.5 })
 
     let enemyProjectiles = new Projectiles(this)
     let enemies = new Enemies(this, enemyProjectiles, items)
-    enemies.add('soldier', { x: TILE_SIZE*2, y: TILE_SIZE*4 })
-    enemies.add('imp', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
+    enemies.add('soldier', { x: TILE_SIZE*2, y: TILE_SIZE*5 })
+    enemies.add('soldier', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
     enemies.add('soldier', { x: TILE_SIZE*13, y: TILE_SIZE*9 })
     enemies.add('imp', { x: TILE_SIZE*4, y: TILE_SIZE*17.6 })
+
+    enemies.add('soldier', { x: TILE_SIZE*28, y: TILE_SIZE*20 })
+    enemies.add('soldier', { x: TILE_SIZE*47, y: TILE_SIZE*20 })
+    enemies.add('soldier', { x: TILE_SIZE*47, y: TILE_SIZE*22 })
+    enemies.add('imp', { x: TILE_SIZE*48, y: TILE_SIZE*21 })
 
     this.physics.add.collider(player, floor);
     this.physics.add.collider(player, lowObstacles);
@@ -73,7 +80,6 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, enemies);
 
     this.physics.add.collider(playerProjectiles, floor, function(projectile, tile) {
-      console.log("COLLIDE CALLBACK")
       projectile.impact()
     })
     this.physics.add.collider(playerProjectiles, highObstacles, function(projectile, tile) {
@@ -105,7 +111,21 @@ export default class GameScene extends Phaser.Scene {
 
     this.player = player
     this.enemies = enemies
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.addKeys({
+      up: KeyCodes.UP,
+      down: KeyCodes.DOWN,
+      left: KeyCodes.LEFT,
+      right: KeyCodes.RIGHT,
+      space: KeyCodes.SPACE,
+      shift: KeyCodes.SHIFT,
+
+      pistol: KeyCodes.TWO,
+      shotgun: KeyCodes.THREE,
+      chaingun: KeyCodes.FOUR,
+      rocketLauncher: KeyCodes.FIVE,
+      plasmaRifle: KeyCodes.SIX,
+      bfg9000: KeyCodes.SEVEN
+    })
   }
 
   update(time) {

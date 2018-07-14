@@ -1,11 +1,23 @@
+const Palette = {
+  red: '#BB0000',
+  yellow: '#FFFF73',
+  grey: '#999999',
+  black: '#000000'
+}
+
 const DisplayLargeStyle = {
-  color: '#BB0000', font: '24pt Doom',
-  stroke: '#000000', strokeThickness: 4
+  color: Palette.red, font: '24pt Doom',
+  stroke: Palette.black, strokeThickness: 4
 }
 
 const DisplaySmallStyle = {
-  color: '#FFFF73', font: '14pt Square',
-  stroke: '#000000', strokeThickness: 4
+  color: Palette.yellow, font: '14pt Square',
+  stroke: Palette.black, strokeThickness: 4
+}
+
+const ArmsIndexGrey = {
+  color: Palette.grey, font: '14pt Square',
+  stroke: Palette.black, strokeThickness: 4
 }
 
 const Depth = {
@@ -52,6 +64,15 @@ export default class HudScene extends Phaser.Scene {
       }
     }
 
+    let arms = {
+      "2": this.add.text(273, 525, "2", DisplaySmallStyle),
+      "3": this.add.text(303, 525, "3", ArmsIndexGrey),
+      "4": this.add.text(333, 525, "4", ArmsIndexGrey),
+      "5": this.add.text(273, 550, "5", ArmsIndexGrey),
+      "6": this.add.text(303, 550, "6", ArmsIndexGrey),
+      "7": this.add.text(333, 550, "7", ArmsIndexGrey)
+    }
+
     let gameScene = this.scene.get('level-1');
     gameScene.events.on('healthChange', function (health) {
       healthDisplay.setText(`${health.toString()}%`)
@@ -62,6 +83,10 @@ export default class HudScene extends Phaser.Scene {
       if (ammoType == equippedAmmoType) {
         ammoDisplay.setText(remaining.toString())
       }
+    })
+
+    gameScene.events.on('gainWeapon', function(armsIndex) {
+      arms[armsIndex].setColor(Palette.yellow)
     })
 
     gameScene.events.on('weaponChange', function(ammoType, remaining) {
