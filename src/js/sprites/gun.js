@@ -1,3 +1,5 @@
+const random = new Phaser.Math.RandomDataGenerator()
+
 export default class Gun {
 
   constructor(config, ammoBag, projectiles, soundManager) {
@@ -9,17 +11,22 @@ export default class Gun {
     this.ammoType = config.ammoType
     this.ammoCost = config.ammoCost
 
-    this.projectileBaseConfig = config.projectile
+    this.projectileConfig = config.projectile
   }
 
   fire(origin, direction) {
     let ammoTaken = this.ammoBag.takeAmmo(this.ammoType, this.ammoCost)
     if (ammoTaken) {
-      let projectileConfig = {...this.projectileBaseConfig,
-        owner: origin,
-        direction: direction
+      let burst = this.projectileConfig.burst || 1
+      let maxMiss = this.projectileConfig.maxMissRadians || 0
+      for (var i = 0; i < burst; i++) {
+        let alteredDirection = random.realInRange(direction - maxMiss, direction + maxMiss)
+        console.log(alteredDirection)
+        this.projectiles.addProjectile({...this.projectileConfig,
+          owner: origin,
+          direction: alteredDirection
+        })
       }
-      this.projectiles.addProjectile(projectileConfig)
       this.soundManager.play(this.key)
     } else {
       console.log("NOT ENOUGH AMMO")

@@ -73,11 +73,12 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, enemies);
 
     this.physics.add.collider(playerProjectiles, floor, function(projectile, tile) {
+      console.log("COLLIDE CALLBACK")
       projectile.impact()
-    });
+    })
     this.physics.add.collider(playerProjectiles, highObstacles, function(projectile, tile) {
       projectile.impact()
-    });
+    })
 
     this.physics.add.collider(playerProjectiles, enemies, function(projectile, imp) {
       imp.takeDamage(projectile.damage)

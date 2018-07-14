@@ -33,21 +33,23 @@ export default class HudScene extends Phaser.Scene {
     ammoDisplay.setDepth(Depth.Display)
     let equippedAmmoType = "bullets"
 
-    let bulletLeft = this.add.text(690, 526, "50", DisplaySmallStyle)
-    let bulletMax = this.add.text(750, 526, "200", DisplaySmallStyle)
-
-    let shellLeft = this.add.text(690, 542, "0", DisplaySmallStyle)
-    let shellMax = this.add.text(750, 542, "50", DisplaySmallStyle)
-
-    let rocketLeft = this.add.text(690, 558, "0", DisplaySmallStyle)
-    let rocketMax = this.add.text(750, 558, "50", DisplaySmallStyle)
-
-    let plasmaLeft = this.add.text(690, 574, "0", DisplaySmallStyle)
-    let plasmaMax = this.add.text(750, 574, "200", DisplaySmallStyle)
-
     let ammoDisplays = {
-      bullets: { max: bulletMax, remaining: bulletLeft },
-      shells: { max: shellMax, remaining: shellLeft }
+      bullets: {
+        max: this.add.text(750, 526, "200", DisplaySmallStyle),
+        remaining: this.add.text(690, 526, "50", DisplaySmallStyle)
+      },
+      shells: {
+        max: this.add.text(750, 542, "50", DisplaySmallStyle),
+        remaining: this.add.text(690, 542, "0", DisplaySmallStyle)
+      },
+      rockets: {
+        max: this.add.text(750, 558, "50", DisplaySmallStyle),
+        remaining: this.add.text(690, 558, "0", DisplaySmallStyle)
+      },
+      plasma: {
+        max: this.add.text(750, 574, "200", DisplaySmallStyle),
+        remaining: this.add.text(690, 574, "0", DisplaySmallStyle)
+      }
     }
 
     let gameScene = this.scene.get('level-1');
@@ -56,7 +58,6 @@ export default class HudScene extends Phaser.Scene {
     }, this);
 
     gameScene.events.on('ammoChange', function(ammoType, remaining) {
-      console.log(`ammoChange(${ammoType}, ${remaining})`)
       ammoDisplays[ammoType].remaining.setText(remaining.toString())
       if (ammoType == equippedAmmoType) {
         ammoDisplay.setText(remaining.toString())
@@ -64,7 +65,6 @@ export default class HudScene extends Phaser.Scene {
     })
 
     gameScene.events.on('weaponChange', function(ammoType, remaining) {
-      console.log(`weaponChange(${ammoType}, ${remaining})`)
       equippedAmmoType = ammoType
       ammoDisplay.setText(remaining.toString())
     })

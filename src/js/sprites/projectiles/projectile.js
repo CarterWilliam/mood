@@ -13,7 +13,7 @@ export default class Projectile extends Phaser.GameObjects.Sprite {
     if(config.size) {
       this.body.setSize(config.size, config.size)
     }
-    this.body.setCollideWorldBounds(true)
+    this.body.setCollideWorldBounds(false)
     this.body.setVelocityX(Math.cos(config.direction) * config.speed)
     this.body.setVelocityY(Math.sin(config.direction) * config.speed)
   }

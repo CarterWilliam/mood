@@ -36,4 +36,11 @@ export default GunCarrying => class extends GunCarrying {
   canFire() {
     return this.ammoBag.has(this.equipped.ammoType, this.equipped.ammoCost)
   }
+
+  equip(weaponKey, playSound) {
+    if (this.has(weaponKey)) {
+      this.equipped = this.guns[weaponItem.key]
+      if (playSound) this.scene.sound.play('weapon-pickup')
+    }
+  }
 }
