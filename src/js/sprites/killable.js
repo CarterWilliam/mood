@@ -7,6 +7,9 @@ export default Killable => class extends Killable {
     this.assetKey = config.key
     this.maxHealth = config.health
     this.health = config.health
+
+    this.hurtSound = this.scene.sound.add(`${config.key}-hurt`)
+    this.dieSound = this.scene.sound.add(`${config.key}-die`)
   }
 
   takeDamage(hitPoints) {
@@ -15,7 +18,7 @@ export default Killable => class extends Killable {
       this.health = 0
       this.die()
     } else {
-      this.playSound('hurt')
+      this.hurtSound.play()
       if (this.onDamage) { this.onDamage() }
     }
   }
@@ -25,14 +28,12 @@ export default Killable => class extends Killable {
   }
 
   die() {
-    this.playSound('die')
+    // this.scene.sound.stop(`${this.assetKey}-hurt`)
+    this.hurtSound.stop()
+    this.dieSound.play()
     this.anims.play(`${this.assetKey}-die`)
     this.setDepth(Depth.ONTHEFLOOR)
     this.body.destroy()
     if (this.onDie) { this.onDie() }
-  }
-
-  playSound(soundKey) {
-    this.scene.sound.play(`${this.assetKey}-${soundKey}`)
   }
 }

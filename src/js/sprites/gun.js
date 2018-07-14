@@ -21,7 +21,6 @@ export default class Gun {
       let maxMiss = this.projectileConfig.maxMissRadians || 0
       for (var i = 0; i < burst; i++) {
         let alteredDirection = random.realInRange(direction - maxMiss, direction + maxMiss)
-        console.log(alteredDirection)
         this.projectiles.addProjectile({...this.projectileConfig,
           owner: origin,
           direction: alteredDirection

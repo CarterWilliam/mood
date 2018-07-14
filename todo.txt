@@ -3,8 +3,8 @@ FEATURES
 - HUD /
 - Level recipe
 - Ammo /
-- Item pickup
-- Shotgun shooting
+- Item pickup /
+- Shotgun shooting /
 - Switch weapons
 - ChainGun
 - Create shotgun soldier/Commando
