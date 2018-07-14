@@ -7,28 +7,30 @@ export default GunCarrying => class extends GunCarrying {
 
   constructor(config) {
     super(config)
-
     this.ammoBag = new AmmoBag(this.scene)
-    let _this = this
+    this.scene = config.scene
+
     this.guns = {
-      pistol: new Gun({...PistolConfig,
-        player: _this,
-        projectiles: config.projectiles,
-        ammoBag: _this.ammoBag
-      })
+      pistol: new Gun(
+        PistolConfig,
+        this.ammoBag,
+        config.projectiles,
+        this.scene.sound)
     }
-    this.equipped = this.gun = this.guns.pistol
+    this.equipped = this.guns.pistol
   }
 
-  has(weaponName) {
-    return this.guns[weaponItem]
+  has(weaponKey) {
+    return this.guns[weaponKey]
   }
 
   pickUp(weaponItem) {
     if (!this.has(weaponItem.key)) {
-      this.guns[weaponItem.key] = new Gun(weaponItem)
+      this.guns[weaponItem.key] = new Gun(weaponItem, this.ammoBag, this.projectiles, this.scene.sound)
+      this.equipped = this.guns[weaponItem.key]
+      this.scene.events.emit('weaponChange', this.equipped.ammoType, this.ammoBag.remaining(this.equipped.ammoType))
     }
-    this.ammoBag.gainAmmo(weaponItem.ammoUnits)
+    this.ammoBag.gainAmmo(weaponItem.ammoType, weaponItem.ammoUnits)
   }
 
   canFire() {

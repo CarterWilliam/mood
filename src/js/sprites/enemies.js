@@ -1,7 +1,7 @@
 import Enemy from 'sprites/enemy'
 
-let SoldierBaseConfig = require('recipes/enemies/soldier.json')
-let ImpBaseConfig = require('recipes/enemies/imp.json')
+const SoldierBaseConfig = require('recipes/enemies/soldier.json')
+const ImpBaseConfig = require('recipes/enemies/imp.json')
 
 export default class Enemies extends Phaser.GameObjects.Group {
 
@@ -10,7 +10,6 @@ export default class Enemies extends Phaser.GameObjects.Group {
     this.projectiles = enemyProjectiles
     this.items = items
   }
-
 
   add(key, position) {
     let config = baseConfig(key)

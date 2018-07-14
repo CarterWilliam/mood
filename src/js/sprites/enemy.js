@@ -151,12 +151,12 @@ export default class Enemy extends Killable(Sprite) {
     if (this.itemDrop) {
       let _this = this
       this.on('animationcomplete', function() {
-        _this.items.add(new Item({
-          key: _this.itemDrop.itemKey,
-          scene: _this.scene,
-          x: _this.x + _this.itemDrop.offset.x,
-          y: _this.y + _this.itemDrop.offset.y
-        }))
+        _this.items.add(
+          _this.itemDrop.itemKey,
+          {
+            x: _this.x + _this.itemDrop.offset.x,
+            y: _this.y + _this.itemDrop.offset.y
+          })
       })
     }
   }

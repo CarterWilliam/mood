@@ -31,6 +31,7 @@ export default class HudScene extends Phaser.Scene {
     let ammoDisplay = this.add.text(66, 552, "50", DisplayLargeStyle)
     ammoDisplay.setOrigin(0.5)
     ammoDisplay.setDepth(Depth.Display)
+    let equippedAmmoType = "bullets"
 
     let bulletLeft = this.add.text(690, 526, "50", DisplaySmallStyle)
     let bulletMax = this.add.text(750, 526, "200", DisplaySmallStyle)
@@ -44,14 +45,28 @@ export default class HudScene extends Phaser.Scene {
     let plasmaLeft = this.add.text(690, 574, "0", DisplaySmallStyle)
     let plasmaMax = this.add.text(750, 574, "200", DisplaySmallStyle)
 
+    let ammoDisplays = {
+      bullets: { max: bulletMax, remaining: bulletLeft },
+      shells: { max: shellMax, remaining: shellLeft }
+    }
+
     let gameScene = this.scene.get('level-1');
     gameScene.events.on('healthChange', function (health) {
       healthDisplay.setText(`${health.toString()}%`)
     }, this);
 
-    gameScene.events.on('ammoChange', function(ammo) {
-      ammoDisplay.setText(ammo.toString())
-      bulletLeft.setText(ammo.toString())
+    gameScene.events.on('ammoChange', function(ammoType, remaining) {
+      console.log(`ammoChange(${ammoType}, ${remaining})`)
+      ammoDisplays[ammoType].remaining.setText(remaining.toString())
+      if (ammoType == equippedAmmoType) {
+        ammoDisplay.setText(remaining.toString())
+      }
+    })
+
+    gameScene.events.on('weaponChange', function(ammoType, remaining) {
+      console.log(`weaponChange(${ammoType}, ${remaining})`)
+      equippedAmmoType = ammoType
+      ammoDisplay.setText(remaining.toString())
     })
   }
 }

@@ -202,7 +202,7 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
 
   whileFiring() {
     if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
-      this.gun.fire()
+      this.equipped.fire(this, this.direction)
       this.fired = true
     }
 
