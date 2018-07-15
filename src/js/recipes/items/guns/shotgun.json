@@ -5,7 +5,7 @@
   "ammoType": "shells",
   "ammoCost": 1,
   "ammoUnits": 8,
-  "fireInterval": 2000,
+  "fireInterval": 1000,
   "projectile": {
     "type": "bullet",
     "burst": 7,

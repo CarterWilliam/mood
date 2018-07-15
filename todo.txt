@@ -1,15 +1,16 @@
 FEATURES
 --------
 - HUD /
-- Level recipe
+- Level/scene recipe
+- chaining scenes
 - Ammo /
 - Item pickup /
 - Shotgun shooting /
-- Switch weapons
+- Switch weapons /
+- shot duration /
 - ChainGun
-- Create shotgun soldier/Commando
 - projectile origins
-- Sprite body
+- Sprite body intersection with wall tiles
 - Enemy AI - follow path to player
   - https://phaser.io/news/2016/02/how-to-use-pathfinding-in-phaser
   - https://phaser.io/news/2018/03/pathfinding-and-phaser-3
@@ -19,9 +20,16 @@ FEATURES
 - credits scene
 - Animated tiles
 - music
+- running
+- input filter
+
+???
+navigate 360 degrees using mouse
+fire while moving
 
 DESIGN
 ------
+- Create shotgun soldier/Commando
 - Level design
 - Splash/Menu screen should say "MOOD" not "DOOM".
 - Add different guns to player sprite animations
@@ -29,7 +37,8 @@ DESIGN
 BUGS
 ----
 - dead bodies appear above walls/ceilings
-- projectiles don't disappear on colliding with world bounds
+- projectiles don't disappear on colliding with world bounds /
+- burst projectiles can go through walls
 
 ADMIN
 -----

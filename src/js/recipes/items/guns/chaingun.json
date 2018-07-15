@@ -4,9 +4,10 @@
   "ammoType": "bullets",
   "ammoCost": 1,
   "ammoUnits": 10,
-  "fireInterval": 500,
+  "fireInterval": 100,
   "projectile": {
     "type": "bullet",
+    "maxMissRadians": 0.05,
     "speed": 600,
     "damage": 10
   },

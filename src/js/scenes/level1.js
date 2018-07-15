@@ -129,7 +129,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update(time) {
-    this.player.update(this.cursors)
+    this.player.update(this.cursors, time)
     this.enemies.getChildren().forEach(enemy => {
       enemy.update(time, this.player)
     })

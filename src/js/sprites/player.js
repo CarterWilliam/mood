@@ -1,4 +1,4 @@
-import { Depth, Direction } from 'configuration/constants'
+import { Depth, Direction, directionKey } from 'configuration/constants'
 import GunCarrying from 'sprites/guncarrying'
 import Killable from 'sprites/killable'
 import Sprite from './sprite'
@@ -9,7 +9,8 @@ const diagonalVelocity = Math.floor(velocity / Math.SQRT2);
 const State = Object.freeze({
   NORMAL: 0,
   FIRING: 1,
-  DEAD: 2
+  FIRING_OVER: 2,
+  DEAD: 3
 })
 
 export default class Player extends GunCarrying(Killable(Sprite)) {
@@ -34,22 +35,28 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
     this.state = State.NORMAL
   }
 
-  update(cursors) {
+  update(cursors, time) {
     switch (this.state) {
       case State.NORMAL:
-        this.action(cursors)
+        this.action(cursors, time)
         break
+      // case State.ABOUT_TO_FIRE:
+      //   this.action(cursors)
+      //   break
       case State.FIRING:
-        this.whileFiring()
+        this.whileFiring(cursors, time)
+        break
+      case State.FIRING_OVER:
+        this.whileFinishingFiring()
         break
       case State.DEAD:
         this.whileDead()
     }
   }
 
-  action(cursors) {
+  action(cursors, time) {
     if (cursors.space.isDown && this.canFire()) {
-      this.startFiring(cursors)
+      this.startFiring(cursors, time)
     } else {
       if (cursors.pistol.isDown) {
         this.equip("pistol")
@@ -140,80 +147,30 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
   }
 
   animateMovement() {
-    switch(this.direction) {
-      case Direction.WEST:
-        this.anims.play('player-move-west', true);
-        break;
-      case Direction.NORTHWEST:
-        this.anims.play('player-move-north-west', true);
-        break;
-      case Direction.NORTH:
-        this.anims.play('player-move-north', true);
-        break;
-      case Direction.NORTHEAST:
-        this.anims.play('player-move-north-east', true);
-        break;
-      case Direction.EAST:
-        this.anims.play('player-move-east', true);
-        break;
-      case Direction.SOUTHEAST:
-        this.anims.play('player-move-south-east', true);
-        break;
-      case Direction.SOUTH:
-        this.anims.play('player-move-south', true);
-        break;
-      case Direction.SOUTHWEST:
-        this.anims.play('player-move-south-west', true);
-        break;
+    this.anims.play(`player-move-${directionKey(this.direction)}`, true)
+  }
+
+  startFiring(cursors, time) {
+    this.state = State.FIRING
+
+    this.body.setVelocityX(0)
+    this.body.setVelocityY(0)
+
+    this.whileFiring(cursors, time)
+  }
+
+  whileFiring(cursors, time) {
+    if (cursors.space.isDown && this.canFire()) {
+      let fired = this.equipped.fire(this, this.direction, time)
+      if (fired) this.anims.play(`player-shoot-${directionKey(this.direction)}`, true)
+    } else {
+      this.state = State.FIRING_OVER
     }
   }
 
-  startFiring(cursors) {
-
-      this.state = State.FIRING
-      this.fired = false
-
-      this.body.setVelocityX(0)
-      this.body.setVelocityY(0)
-
-      switch(this.direction) {
-        case Direction.WEST:
-          this.anims.play('player-shoot-west');
-          break;
-        case Direction.NORTHWEST:
-          this.anims.play('player-shoot-north-west');
-          break;
-      case Direction.NORTH:
-        this.anims.play('player-shoot-north');
-        break;
-      case Direction.NORTHEAST:
-        this.anims.play('player-shoot-north-east');
-        break;
-      case Direction.EAST:
-        this.anims.play('player-shoot-east');
-        break;
-      case Direction.SOUTHEAST:
-        this.anims.play('player-shoot-south-east');
-        break;
-      case Direction.SOUTH:
-        this.anims.play('player-shoot-south');
-        break;
-      case Direction.SOUTHWEST:
-        this.anims.play('player-shoot-south-west');
-        break;
-    }
-    this.anims.stopOnRepeat()
-  }
-
-  whileFiring() {
-    if (!this.fired && this.isShootFrame(this.anims.currentFrame.textureFrame)) {
-      this.equipped.fire(this, this.direction)
-      this.fired = true
-    }
-
+  whileFinishingFiring() {
     if (!this.anims.isPlaying) {
       this.state = State.NORMAL
-      this.fired = false
     }
   }
 

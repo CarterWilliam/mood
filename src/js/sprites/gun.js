@@ -10,13 +10,21 @@ export default class Gun {
 
     this.ammoType = config.ammoType
     this.ammoCost = config.ammoCost
+    this.shotDuration = config.fireInterval
 
     this.projectileConfig = config.projectile
+
+    this.lastShot = 0
   }
 
-  fire(origin, direction) {
+  fire(origin, direction, gameTime) {
+    if (this.inRecoil(gameTime)) {
+      return false
+    }
+
     let ammoTaken = this.ammoBag.takeAmmo(this.ammoType, this.ammoCost)
     if (ammoTaken) {
+      this.lastShot = gameTime
       let burst = this.projectileConfig.burst || 1
       let maxMiss = this.projectileConfig.maxMissRadians || 0
       for (var i = 0; i < burst; i++) {
@@ -27,9 +35,15 @@ export default class Gun {
         })
       }
       this.soundManager.play(this.key)
+      return true
     } else {
       console.log("NOT ENOUGH AMMO")
       // play empty ammo noise
+      return false
     }
+  }
+
+  inRecoil(gameTime) {
+    return gameTime < this.lastShot + this.shotDuration
   }
 }
