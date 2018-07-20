@@ -58,6 +58,7 @@ export default class GameScene extends Phaser.Scene {
     let items = new Items(this)
 
     items.add('shotgun', { x: TILE_SIZE*6, y: TILE_SIZE*17.5 })
+    items.add('chaingun', { x: TILE_SIZE*15, y: TILE_SIZE*25 })
 
     let enemyProjectiles = new Projectiles(this)
     let enemies = new Enemies(this, enemyProjectiles, items)

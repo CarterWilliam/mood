@@ -1,15 +1,17 @@
 {
-  "key": "pistol",
+  "key": "chaingun",
   "itemType": "gun",
+  "armsIndex": "4",
   "ammoType": "bullets",
   "ammoCost": 1,
   "ammoUnits": 10,
-  "fireInterval": 100,
+  "fireInterval": 50,
   "projectile": {
     "type": "bullet",
     "maxMissRadians": 0.05,
     "speed": 600,
     "damage": 10
   },
+  "onFireAudio": "pistol",
   "onPickUpAudio": "weapon-pickup"
 }

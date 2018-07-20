@@ -40,9 +40,6 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
       case State.NORMAL:
         this.action(cursors, time)
         break
-      // case State.ABOUT_TO_FIRE:
-      //   this.action(cursors)
-      //   break
       case State.FIRING:
         this.whileFiring(cursors, time)
         break
@@ -62,6 +59,8 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
         this.equip("pistol")
       } else if (cursors.shotgun.isDown) {
         this.equip("shotgun")
+      } else if (cursors.chaingun.isDown) {
+        this.equip("chaingun")
       }
       this.move(cursors)
     }

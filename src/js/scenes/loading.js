@@ -44,6 +44,7 @@ export default class LoadingScene extends Phaser.Scene {
     this.load.image('hud', 'assets/images/hud.png')
     this.load.image('clip', 'assets/images/items/ammo/clip.png')
     this.load.image('shotgun', 'assets/images/items/guns/shotgun.png')
+    this.load.image('chaingun', 'assets/images/items/guns/chaingun.png')
   }
 
   loadMaps() {

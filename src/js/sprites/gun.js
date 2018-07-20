@@ -11,6 +11,7 @@ export default class Gun {
     this.ammoType = config.ammoType
     this.ammoCost = config.ammoCost
     this.shotDuration = config.fireInterval
+    this.onFireAudio = config.onFireAudio
 
     this.projectileConfig = config.projectile
 
@@ -34,7 +35,7 @@ export default class Gun {
           direction: alteredDirection
         })
       }
-      this.soundManager.play(this.key)
+      this.soundManager.play(this.onFireAudio)
       return true
     } else {
       console.log("NOT ENOUGH AMMO")

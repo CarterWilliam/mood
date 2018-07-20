@@ -4,11 +4,12 @@
   "ammoType": "bullets",
   "ammoCost": 1,
   "ammoUnits": 10,
-  "fireInterval": 500,
+  "fireInterval": 400,
   "projectile": {
     "type": "bullet",
     "speed": 600,
     "damage": 10
   },
+  "onFireAudio": "pistol",
   "onPickUpAudio": "weapon-pickup"
 }
