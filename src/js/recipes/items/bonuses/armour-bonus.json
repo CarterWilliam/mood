@@ -1,0 +1,7 @@
+{
+  "key": "armour-bonus",
+  "animation": "armour-shimmer",
+  "itemType": "armour",
+  "units": 1,
+  "onPickUpAudio": "item-pickup"
+}

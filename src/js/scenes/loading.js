@@ -65,6 +65,8 @@ export default class LoadingScene extends Phaser.Scene {
 
     this.load.image('bullet', 'assets/images/bullet.png')
     this.load.spritesheet('fireball', 'assets/images/fireball.png', { frameWidth: 51, frameHeight: 51 })
+
+    this.load.spritesheet('armour-bonus', 'assets/images/items/armour-bonus.png', { frameWidth: 16, frameHeight: 15 })
   }
 
   loadAudio() {
@@ -82,6 +84,7 @@ export default class LoadingScene extends Phaser.Scene {
     this.load.audio('player-die', 'assets/audio/player/death.ogg')
     this.load.audio('player-hurt', 'assets/audio/player/pain.ogg')
 
+    this.load.audio('item-pickup', 'assets/audio/player/item-pickup.ogg')
     this.load.audio('weapon-pickup', 'assets/audio/player/weapon-pickup.ogg')
   }
 

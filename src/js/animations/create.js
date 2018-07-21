@@ -19,6 +19,9 @@ module.exports = function(goLoader) {
   createAnimation('player', 'player-shoot-south-east', [ 47, 46 ], 8, 0)
   createAnimation('player', 'player-die', [ 48, 56, 57, 58, 59, 60, 61, 62 ], 10, 0)
 
+  // Items
+  createAnimation('armour-bonus', 'armour-shimmer', [ 0, 1, 2, 3, 2, 1 ], 4, -1)
+
   // Soldier
   createAnimation('soldier', 'soldier-passive', [ 0, 2 ], 2)
   createConsecutiveAnimation('soldier', 'soldier-move-south', 0, 3)

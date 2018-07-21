@@ -31,6 +31,7 @@
         { "key": "imp", "location": { "x": 48, "y": 21 } }
       ],
       "items": [
+        { "key": "armour-bonus", "location": { "x": 4, "y": 25 } },
         { "key": "shotgun", "location": { "x": 6, "y": 17.5 } },
         { "key": "chaingun", "location": { "x": 15, "y": 25 } }
       ]

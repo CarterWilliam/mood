@@ -5,12 +5,12 @@ const Palette = {
   black: '#000000'
 }
 
-const DisplayLargeStyle = {
+const LargeGaugeRed = {
   color: Palette.red, font: '24pt Doom',
   stroke: Palette.black, strokeThickness: 4
 }
 
-const DisplaySmallStyle = {
+const SmallGaugeYellow = {
   color: Palette.yellow, font: '14pt Square',
   stroke: Palette.black, strokeThickness: 4
 }
@@ -25,6 +25,8 @@ const Depth = {
   Display: 1
 }
 
+const LargeGaugeY = 553
+
 export default class HudScene extends Phaser.Scene {
 
   constructor() {
@@ -33,6 +35,7 @@ export default class HudScene extends Phaser.Scene {
     this.equippedAmmoType = 'bullets'
     this.currentAmmo = null
     this.health = null
+    this.armour = null
     this.arms = null
     this.ammo = null
   }
@@ -42,16 +45,20 @@ export default class HudScene extends Phaser.Scene {
     background.setOrigin(0, 0)
     background.setDepth(Depth.Background)
 
-    this.health = this.add.text(194, 552, "100%", DisplayLargeStyle)
+    this.health = this.add.text(194, LargeGaugeY, "100%", LargeGaugeRed)
     this.health.setOrigin(0.5)
     this.health.setDepth(Depth.Display)
 
-    this.currentAmmo = this.add.text(66, 552, "50", DisplayLargeStyle)
+    this.currentAmmo = this.add.text(66, LargeGaugeY, "50", LargeGaugeRed)
     this.currentAmmo.setOrigin(0.5)
     this.currentAmmo.setDepth(Depth.Display)
 
+    this.armour = this.add.text(522, LargeGaugeY, "0%", LargeGaugeRed)
+    this.armour.setOrigin(0.5)
+    this.armour.setDepth(Depth.Display)
+
     this.arms = {
-      "2": this.add.text(273, 525, "2", DisplaySmallStyle),
+      "2": this.add.text(273, 525, "2", SmallGaugeYellow),
       "3": this.add.text(303, 525, "3", ArmsIndexGrey),
       "4": this.add.text(333, 525, "4", ArmsIndexGrey),
       "5": this.add.text(273, 550, "5", ArmsIndexGrey),
@@ -61,20 +68,20 @@ export default class HudScene extends Phaser.Scene {
 
     this.ammo = {
       bullets: {
-        max: this.add.text(750, 526, "200", DisplaySmallStyle),
-        remaining: this.add.text(690, 526, "50", DisplaySmallStyle)
+        max: this.add.text(750, 526, "200", SmallGaugeYellow),
+        remaining: this.add.text(690, 526, "50", SmallGaugeYellow)
       },
       shells: {
-        max: this.add.text(750, 542, "50", DisplaySmallStyle),
-        remaining: this.add.text(690, 542, "0", DisplaySmallStyle)
+        max: this.add.text(750, 542, "50", SmallGaugeYellow),
+        remaining: this.add.text(690, 542, "0", SmallGaugeYellow)
       },
       rockets: {
-        max: this.add.text(750, 558, "50", DisplaySmallStyle),
-        remaining: this.add.text(690, 558, "0", DisplaySmallStyle)
+        max: this.add.text(750, 558, "50", SmallGaugeYellow),
+        remaining: this.add.text(690, 558, "0", SmallGaugeYellow)
       },
       plasma: {
-        max: this.add.text(750, 574, "200", DisplaySmallStyle),
-        remaining: this.add.text(690, 574, "0", DisplaySmallStyle)
+        max: this.add.text(750, 574, "200", SmallGaugeYellow),
+        remaining: this.add.text(690, 574, "0", SmallGaugeYellow)
       }
     }
   }
@@ -82,6 +89,10 @@ export default class HudScene extends Phaser.Scene {
   startWatching(scene) {
     scene.events.on('healthChange', function (health) {
       this.health.setText(`${health.toString()}%`)
+    }, this);
+
+    scene.events.on('armourChange', function (armour) {
+      this.armour.setText(`${armour.toString()}%`)
     }, this);
 
     scene.events.on('ammoChange', function(ammoType, remaining) {

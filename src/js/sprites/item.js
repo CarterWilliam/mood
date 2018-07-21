@@ -9,12 +9,19 @@ export default class Item extends Phaser.GameObjects.Sprite {
 
     config.scene.physics.world.enable(this)
     this.setDepth(Depth.SPRITE)
+
+    if (config.animation) {
+      this.anims.play(config.animation)
+    }
   }
 
   onPickup(player) {
     switch(this.config.itemType) {
       case 'ammo':
         player.ammoBag.gainAmmo(this.config.ammoType, this.config.units)
+        break
+      case 'armour':
+        player.gainArmour(this.config.units)
         break
       case 'gun':
         player.pickUp(this.config)

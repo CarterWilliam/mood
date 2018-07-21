@@ -177,6 +177,10 @@ export default class Player extends GunCarrying(Killable(Sprite)) {
     return (index >= 33 && index <= 47 && index % 2 === 1)
   }
 
+  onArmourChanged() {
+    this.scene.events.emit('armourChange', this.armour)
+  }
+
   onDamage() {
     this.scene.events.emit('healthChange', this.health)
   }
