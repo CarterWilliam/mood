@@ -3,8 +3,9 @@ import GameScene from 'scenes/gamescene'
 
 export default class LoadingScene extends Phaser.Scene {
 
-  constructor() {
-    super({ key: 'loading' })
+  constructor(config) {
+    super({ key: config.key })
+    this.config = config
   }
 
   preload() {
@@ -42,7 +43,6 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   loadImages() {
-    this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
     this.load.image('hud', 'assets/images/hud.png')
     this.load.image('clip', 'assets/images/items/ammo/clip.png')
     this.load.image('shotgun', 'assets/images/items/guns/shotgun.png')
@@ -50,8 +50,12 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   loadMaps() {
-    this.load.image('tiles-futuristic', 'assets/maps/futuristic.png')
-    this.load.tilemapTiledJSON('map-futuristic', 'assets/maps/futuristic.json')
+    this.config.assets.images.forEach(imageConfig => {
+      this.load.image(imageConfig.key, imageConfig.path)
+    })
+    this.config.assets.tilemaps.forEach(tilemapConfig => {
+      this.load.tilemapTiledJSON(tilemapConfig.key, tilemapConfig.path)
+    })
   }
 
   loadSprites() {

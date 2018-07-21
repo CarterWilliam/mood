@@ -97,7 +97,7 @@ export default class HudScene extends Phaser.Scene {
 
     scene.events.on('weaponChange', function(ammoType, remaining) {
       this.equippedAmmoType = ammoType
-      this.ammo[ammoType].remaining.setText(remaining.toString())
+      this.currentAmmo.setText(remaining.toString())
     }, this)
   }
 }

@@ -1,3 +1,4 @@
+import * as WebFont from 'webfontloader'
 
 export default class BootScene extends Phaser.Scene {
 
@@ -6,11 +7,22 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('splash',    '../../assets/images/splash.jpg');
-    this.load.image('loading-bar',  '../../assets/images/loading.png');
+    this.load.image('splash',    '../../assets/images/splash.jpg')
+    this.load.image('loading-bar',  '../../assets/images/loading.png')
+    this.load.image('menu-skull', 'assets/images/menu-select-skull.png')
+
+    this.load.audio('pistol', 'assets/audio/guns/pistol.ogg')
+
+    WebFont.load({
+      custom: {
+        families: ['Doom'],
+        urls: ['css/doom-font.css']
+      }
+    })
   }
 
   create() {
-    this.scene.start('loading')
+    let sceneManager = this.scene
+    setTimeout(() => sceneManager.start('menu'), 100) // Wait for font to load :(
   }
 }

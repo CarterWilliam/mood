@@ -17,6 +17,9 @@ export default class MenuScene extends Phaser.Scene {
 
   create() {
     let menuScene = this
+
+    let level1Config = require('recipes/levels/level1.json')
+
     this.lastMenuEvent = 0
     this.menu = new Menu({x: 200, y: 300 }, this)
     this.menu.push([
@@ -33,7 +36,7 @@ export default class MenuScene extends Phaser.Scene {
         menuScene.menu.hide(this)
       }),
       new MenuItem("Nightmare!", function() {
-        menuScene.scene.start('loading')
+        menuScene.scene.start(level1Config.key)
       })
     ])
     this.keyboard = this.input.keyboard.createCursorKeys();

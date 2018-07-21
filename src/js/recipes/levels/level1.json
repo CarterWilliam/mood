@@ -1,6 +1,15 @@
 {
+  "key": "level1",
   "image": "",
   "music": "",
+  "assets": {
+    "tilemaps": [
+      { "key": "map-futuristic", "path": "assets/maps/futuristic.json" }
+    ],
+    "images":[
+      { "key": "tiles-futuristic", "path": "assets/maps/futuristic.png" }
+    ]
+  },
   "scenes": [
     {
       "key": "scrapyard",
