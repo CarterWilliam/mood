@@ -29,6 +29,12 @@ export default class HudScene extends Phaser.Scene {
 
   constructor() {
     super({ key: 'hud' })
+
+    this.equippedAmmoType = 'bullets'
+    this.currentAmmo = null
+    this.health = null
+    this.arms = null
+    this.ammo = null
   }
 
   create() {
@@ -36,16 +42,24 @@ export default class HudScene extends Phaser.Scene {
     background.setOrigin(0, 0)
     background.setDepth(Depth.Background)
 
-    let healthDisplay = this.add.text(194, 552, "100%", DisplayLargeStyle)
-    healthDisplay.setOrigin(0.5)
-    healthDisplay.setDepth(Depth.Display)
+    this.health = this.add.text(194, 552, "100%", DisplayLargeStyle)
+    this.health.setOrigin(0.5)
+    this.health.setDepth(Depth.Display)
 
-    let ammoDisplay = this.add.text(66, 552, "50", DisplayLargeStyle)
-    ammoDisplay.setOrigin(0.5)
-    ammoDisplay.setDepth(Depth.Display)
-    let equippedAmmoType = "bullets"
+    this.currentAmmo = this.add.text(66, 552, "50", DisplayLargeStyle)
+    this.currentAmmo.setOrigin(0.5)
+    this.currentAmmo.setDepth(Depth.Display)
 
-    let ammoDisplays = {
+    this.arms = {
+      "2": this.add.text(273, 525, "2", DisplaySmallStyle),
+      "3": this.add.text(303, 525, "3", ArmsIndexGrey),
+      "4": this.add.text(333, 525, "4", ArmsIndexGrey),
+      "5": this.add.text(273, 550, "5", ArmsIndexGrey),
+      "6": this.add.text(303, 550, "6", ArmsIndexGrey),
+      "7": this.add.text(333, 550, "7", ArmsIndexGrey)
+    }
+
+    this.ammo = {
       bullets: {
         max: this.add.text(750, 526, "200", DisplaySmallStyle),
         remaining: this.add.text(690, 526, "50", DisplaySmallStyle)
@@ -63,35 +77,27 @@ export default class HudScene extends Phaser.Scene {
         remaining: this.add.text(690, 574, "0", DisplaySmallStyle)
       }
     }
+  }
 
-    let arms = {
-      "2": this.add.text(273, 525, "2", DisplaySmallStyle),
-      "3": this.add.text(303, 525, "3", ArmsIndexGrey),
-      "4": this.add.text(333, 525, "4", ArmsIndexGrey),
-      "5": this.add.text(273, 550, "5", ArmsIndexGrey),
-      "6": this.add.text(303, 550, "6", ArmsIndexGrey),
-      "7": this.add.text(333, 550, "7", ArmsIndexGrey)
-    }
-
-    let gameScene = this.scene.get('level-1');
-    gameScene.events.on('healthChange', function (health) {
-      healthDisplay.setText(`${health.toString()}%`)
+  startWatching(scene) {
+    scene.events.on('healthChange', function (health) {
+      this.health.setText(`${health.toString()}%`)
     }, this);
 
-    gameScene.events.on('ammoChange', function(ammoType, remaining) {
-      ammoDisplays[ammoType].remaining.setText(remaining.toString())
-      if (ammoType == equippedAmmoType) {
-        ammoDisplay.setText(remaining.toString())
+    scene.events.on('ammoChange', function(ammoType, remaining) {
+      this.ammo[ammoType].remaining.setText(remaining.toString())
+      if (ammoType == this.equippedAmmoType) {
+        this.currentAmmo.setText(remaining.toString())
       }
-    })
+    }, this)
 
-    gameScene.events.on('gainWeapon', function(armsIndex) {
-      arms[armsIndex].setColor(Palette.yellow)
-    })
+    scene.events.on('gainWeapon', function(armsIndex) {
+      this.arms[armsIndex].setColor(Palette.yellow)
+    }, this)
 
-    gameScene.events.on('weaponChange', function(ammoType, remaining) {
-      equippedAmmoType = ammoType
-      ammoDisplay.setText(remaining.toString())
-    })
+    scene.events.on('weaponChange', function(ammoType, remaining) {
+      this.equippedAmmoType = ammoType
+      this.ammo[ammoType].remaining.setText(remaining.toString())
+    }, this)
   }
 }

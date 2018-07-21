@@ -33,7 +33,7 @@ export default class MenuScene extends Phaser.Scene {
         menuScene.menu.hide(this)
       }),
       new MenuItem("Nightmare!", function() {
-        menuScene.scene.start('level-1')
+        menuScene.scene.start('loading')
       })
     ])
     this.keyboard = this.input.keyboard.createCursorKeys();

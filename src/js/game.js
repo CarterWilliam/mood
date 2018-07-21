@@ -1,7 +1,6 @@
 import BootScene from 'scenes/boot'
 import LoadingScene from 'scenes/loading'
 import MenuScene from 'scenes/menu'
-import GameScene from 'scenes/level1'
 import HudScene from 'scenes/hud'
 
 var config = {
@@ -17,7 +16,7 @@ var config = {
       gravity: { y: 0 }
     }
   },
-  scene: [ BootScene, LoadingScene, MenuScene, GameScene, HudScene ]
+  scene: [ BootScene, MenuScene, LoadingScene, HudScene ]
 };
 
 var game = new Phaser.Game(config)

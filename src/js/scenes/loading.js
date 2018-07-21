@@ -1,4 +1,5 @@
 import * as WebFont from 'webfontloader'
+import GameScene from 'scenes/gamescene'
 
 export default class LoadingScene extends Phaser.Scene {
 
@@ -17,6 +18,7 @@ export default class LoadingScene extends Phaser.Scene {
     this.loadMaps()
     this.loadSprites()
     this.loadAudio()
+    this.loadScenes()
   }
 
   createLoadBar() {
@@ -94,7 +96,14 @@ export default class LoadingScene extends Phaser.Scene {
     })
   }
 
+  loadScenes() {
+    let level = require('recipes/levels/level1.json')
+    level.scenes.forEach(sceneConfig => {
+      this.scene.add(sceneConfig.key, new GameScene(sceneConfig))
+    })
+  }
+
   create() {
-    this.scene.start('menu')
+    this.scene.start('scrapyard')
   }
 }

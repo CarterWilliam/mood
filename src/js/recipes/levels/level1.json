@@ -1,13 +1,30 @@
 {
-  "map": {
-    "tilemap-key": "map-futuristic",
-    "image-key": "tiles-futuristic"
-  },
-  "enemies": [
+  "image": "",
+  "music": "",
+  "scenes": [
     {
-      "key": "imp",
-      "location": { "x": 4, "y": 17.6 }
+      "key": "scrapyard",
+      "map": {
+        "tilemap": "map-futuristic",
+        "tilemapName": "futuristic",
+        "image": "tiles-futuristic"
+      },
+      "player": { "start": { "x": 2, "y": 25 } },
+      "enemies": [
+        { "key": "soldier", "location": { "x": 2, "y": 5 } },
+        { "key": "soldier", "location": { "x": 14, "y": 22 } },
+        { "key": "soldier", "location": { "x": 13, "y": 9 } },
+        { "key": "imp", "location": { "x": 4, "y": 17.6 } },
+
+        { "key": "soldier", "location": { "x": 28, "y": 20 } },
+        { "key": "soldier", "location": { "x": 47, "y": 20 } },
+        { "key": "soldier", "location": { "x": 47, "y": 22 } },
+        { "key": "imp", "location": { "x": 48, "y": 21 } }
+      ],
+      "items": [
+        { "key": "shotgun", "location": { "x": 6, "y": 17.5 } },
+        { "key": "chaingun", "location": { "x": 15, "y": 25 } }
+      ]
     }
-  ],
-  "items": []
+  ]
 }

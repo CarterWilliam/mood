@@ -12,8 +12,10 @@ const KeyCodes = Phaser.Input.Keyboard.KeyCodes
 
 export default class GameScene extends Phaser.Scene {
 
-  constructor() {
-    super({ key: 'level-1' })
+  constructor(config) {
+    super({ key: config.key })
+
+    this.config = config
 
     this.cursors = null
     this.player = null
@@ -21,8 +23,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    let map = this.make.tilemap({ key: 'map-futuristic' });
-    let tileset = map.addTilesetImage('futuristic', 'tiles-futuristic')
+    let map = this.make.tilemap({ key: this.config.map.tilemap });
+    let tileset = map.addTilesetImage(this.config.map.tilemapName, this.config.map.image)
 
     let floor = map.createStaticLayer('floor', tileset, 0, 0);
     floor.setCollisionByProperty({ collide: true });
@@ -49,28 +51,35 @@ export default class GameScene extends Phaser.Scene {
     let player = new Player({
       scene: this,
       key: 'player',
-      x: TILE_SIZE*2, y: TILE_SIZE*25,
+      x: TILE_SIZE*this.config.player.start.x,
+      y: TILE_SIZE*this.config.player.start.y,
       projectiles: playerProjectiles
     })
 
     this.cameras.main.startFollow(player, true)
 
     let items = new Items(this)
-
-    items.add('shotgun', { x: TILE_SIZE*6, y: TILE_SIZE*17.5 })
-    items.add('chaingun', { x: TILE_SIZE*15, y: TILE_SIZE*25 })
+    this.config.items.forEach(itemConfig => {
+      items.add(
+        itemConfig.key,
+        {
+          x: TILE_SIZE*itemConfig.location.x,
+          y: TILE_SIZE*itemConfig.location.y
+        }
+      )
+    })
 
     let enemyProjectiles = new Projectiles(this)
     let enemies = new Enemies(this, enemyProjectiles, items)
-    enemies.add('soldier', { x: TILE_SIZE*2, y: TILE_SIZE*5 })
-    enemies.add('soldier', { x: TILE_SIZE*14, y: TILE_SIZE*22 })
-    enemies.add('soldier', { x: TILE_SIZE*13, y: TILE_SIZE*9 })
-    enemies.add('imp', { x: TILE_SIZE*4, y: TILE_SIZE*17.6 })
-
-    enemies.add('soldier', { x: TILE_SIZE*28, y: TILE_SIZE*20 })
-    enemies.add('soldier', { x: TILE_SIZE*47, y: TILE_SIZE*20 })
-    enemies.add('soldier', { x: TILE_SIZE*47, y: TILE_SIZE*22 })
-    enemies.add('imp', { x: TILE_SIZE*48, y: TILE_SIZE*21 })
+    this.config.enemies.forEach(enemyConfig => {
+      enemies.add(
+        enemyConfig.key,
+        {
+          x: TILE_SIZE*enemyConfig.location.x,
+          y: TILE_SIZE*enemyConfig.location.y
+        }
+      )
+    })
 
     this.physics.add.collider(player, floor);
     this.physics.add.collider(player, lowObstacles);
@@ -108,7 +117,10 @@ export default class GameScene extends Phaser.Scene {
       item.onPickup(player)
     })
 
-    let hud = this.scene.launch('hud')
+    let hud = this.scene.get('hud')
+    hud.startWatching(this)
+    this.scene.moveAbove(this.config.key, 'hud')
+    this.scene.launch('hud')
 
     this.player = player
     this.enemies = enemies
