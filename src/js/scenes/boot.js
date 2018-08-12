@@ -23,6 +23,6 @@ export default class BootScene extends Phaser.Scene {
 
   create() {
     let sceneManager = this.scene
-    setTimeout(() => sceneManager.start('menu'), 100) // Wait for font to load :(
+    setTimeout(() => sceneManager.start('menu'), 500) // Wait for font to load :(
   }
 }

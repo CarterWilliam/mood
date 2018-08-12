@@ -1,0 +1,41 @@
+{
+  "key": "portal-test",
+  "image": "",
+  "music": "",
+  "assets": {
+    "tilemaps": [
+      { "key": "courtyard-left-map", "path": "assets/maps/portal-test-left.json" },
+      { "key": "courtyard-right-map", "path": "assets/maps/portal-test-right.json" }
+    ],
+    "images":[
+      { "key": "tiles-futuristic", "path": "assets/maps/futuristic.png" }
+    ]
+  },
+  "initialScene": "courtyard-left",
+  "scenes": [
+    {
+      "key": "courtyard-left",
+      "map": {
+        "tilemap": "courtyard-left-map",
+        "tilemapName": "futuristic",
+        "image": "tiles-futuristic"
+      },
+      "player": { "start": { "x": 5, "y": 5 } },
+      "enemies": [],
+      "items": [
+        { "key": "chaingun", "location": { "x": 3, "y": 3 } }
+      ]
+    },
+    {
+      "key": "courtyard-right",
+      "map": {
+        "tilemap": "courtyard-right-map",
+        "tilemapName": "futuristic",
+        "image": "tiles-futuristic"
+      },
+      "player": { "start": { "x": 5, "y": 5 } },
+      "enemies": [],
+      "items": []
+    }
+  ]
+}

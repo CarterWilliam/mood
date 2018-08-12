@@ -42,6 +42,22 @@ export default class GameScene extends Phaser.Scene {
     foreground.setScale(SCALE, SCALE)
     foreground.setDepth(Depth.FOREGROUND)
 
+
+    let objectLayer = map.getObjectLayer('portals')
+    
+    let portals = objectLayer.objects.map(portalConfig => {
+      let portal = this.add.zone(
+        portalConfig.x, portalConfig.y,
+        portalConfig.width, portalConfig.height)
+      portal.destination = portalConfig.properties.goto
+      this.physics.world.enable(portal, Phaser.Physics.Arcade.STATIC_BODY)
+      return portal
+    })
+
+    let portalGroup = this.add.group(portals, {
+      classType: Phaser.GameObjects.Zone
+    })
+
     this.physics.world.setBounds(0, 0, 64*TILE_SIZE*SCALE, 32*TILE_SIZE*SCALE)
 
     createAnimations(this)
@@ -115,6 +131,18 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(items, player, function(item, tile) {
       item.onPickup(player)
+    })
+
+    let sceneManager = this.scene
+    this.physics.add.collider(portalGroup, player, function(portal, plyr) {
+      let currentScene = sceneManager.key
+      let nextScene = portal.destination
+      sceneManager.pause(currentScene)
+      if (sceneManager.isSleeping(nextScene)) {
+        sceneManager.resume(nextScene)
+      } else {
+        sceneManager.start(nextScene)
+      }
     })
 
     let hud = this.scene.get('hud')

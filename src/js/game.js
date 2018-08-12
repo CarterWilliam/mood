@@ -3,7 +3,7 @@ import HudScene from 'scenes/hud'
 import LoadingScene from 'scenes/loading'
 import MenuScene from 'scenes/menu'
 
-let level1Config = require('recipes/levels/level1.json')
+let levelConfig = require('recipes/levels/portal-test.json')
 
 var config = {
   type: Phaser.AUTO,
@@ -18,7 +18,7 @@ var config = {
       gravity: { y: 0 }
     }
   },
-  scene: [ BootScene, MenuScene, new LoadingScene(level1Config), HudScene ]
+  scene: [ BootScene, MenuScene, new LoadingScene(levelConfig), HudScene ]
 };
 
 var game = new Phaser.Game(config)

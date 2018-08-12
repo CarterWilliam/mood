@@ -104,13 +104,13 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   loadScenes() {
-    let level = require('recipes/levels/level1.json')
-    level.scenes.forEach(sceneConfig => {
+    this.config.scenes.forEach(sceneConfig => {
+      console.log(`Adding scene '${sceneConfig.key}'`)
       this.scene.add(sceneConfig.key, new GameScene(sceneConfig))
     })
   }
 
   create() {
-    this.scene.start('scrapyard')
+    this.scene.start(this.config.initialScene)
   }
 }

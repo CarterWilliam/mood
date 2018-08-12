@@ -18,7 +18,7 @@ export default class MenuScene extends Phaser.Scene {
   create() {
     let menuScene = this
 
-    let level1Config = require('recipes/levels/level1.json')
+    let level1Config = require('recipes/levels/portal-test.json')
 
     this.lastMenuEvent = 0
     this.menu = new Menu({x: 200, y: 300 }, this)
